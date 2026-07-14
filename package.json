@@ -17,5 +17,14 @@
     "@playwright/test": "^1.56.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "core-js-pure",
+      "esbuild",
+      "sharp",
+      "sqlite3"
+    ]
   }
 }
