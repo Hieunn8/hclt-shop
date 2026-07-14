@@ -102,6 +102,14 @@ docker compose -f deploy/docker-compose.host-nginx.yml up -d --build cms
 docker compose -f deploy/docker-compose.host-nginx.yml logs -f cms
 ```
 
+Nếu container CMS đang restart loop sau khi đã từng build image cũ, rebuild sạch:
+
+```bash
+docker compose -f deploy/docker-compose.host-nginx.yml build --no-cache cms
+docker compose -f deploy/docker-compose.host-nginx.yml up -d cms
+docker compose -f deploy/docker-compose.host-nginx.yml logs -f cms
+```
+
 Mở admin:
 
 ```text

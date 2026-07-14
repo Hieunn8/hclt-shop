@@ -17,7 +17,8 @@ RUN pnpm build || true
 FROM node:22-alpine
 WORKDIR /app/apps/cms
 ENV NODE_ENV=production
+COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/apps/cms ./
 COPY --from=builder /app/apps/cms/node_modules ./node_modules
 EXPOSE 1337
-CMD ["pnpm", "start"]
+CMD ["node", "node_modules/@strapi/strapi/bin/strapi.js", "start"]
