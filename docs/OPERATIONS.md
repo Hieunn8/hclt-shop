@@ -20,6 +20,10 @@ Default target is `http://localhost:3000/api/health`. Override with `FRONTEND_HE
 
 Set the same `REVALIDATE_SECRET` in frontend and CMS env. CMS lifecycles call `FRONTEND_REVALIDATE_URL` after product, category, blog post, policy, or site setting changes. Frontend maps those model events to fixed cache tags; arbitrary internet-provided tags are not accepted.
 
+## VPS CMS Deployment
+
+See `docs/VPS_CMS_DEPLOYMENT.md` for the production CMS deployment flow, random secret generation commands, public-role permission bootstrap, seed, and revalidation checks.
+
 ## Backup
 
 ```bash
