@@ -11,3 +11,4 @@
 - Configure HTTPS/HSTS after certificate validation.
 - Restrict Strapi CORS to the production frontend and preview domains.
 - Disable public create permissions in Strapi; frontend route handlers own mutations.
+- To bootstrap read-only public permissions, set `CONFIGURE_PUBLIC_PERMISSIONS=true` for one controlled CMS start, verify the Public role, then set it back to `false`.
