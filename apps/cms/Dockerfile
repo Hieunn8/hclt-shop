@@ -21,5 +21,6 @@ ENV NODE_ENV=production
 COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/apps/cms ./
 COPY --from=builder /app/apps/cms/node_modules ./node_modules
+RUN mkdir -p public/uploads && test -d dist && test -d public/uploads
 EXPOSE 1337
 CMD ["node", "node_modules/@strapi/strapi/bin/strapi.js", "start"]

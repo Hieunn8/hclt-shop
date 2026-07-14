@@ -31,7 +31,7 @@ services:
     expose:
       - "1337"
     volumes:
-      - cms_uploads:/opt/aivisionary/data/uploads
+      - cms_uploads:/app/apps/cms/public/uploads
     mem_limit: 1536m
     mem_reservation: 512m
     cpus: 1.5
