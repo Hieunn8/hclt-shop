@@ -1,0 +1,53 @@
+# Use this compose file when the VPS already runs host-level Nginx on ports 80/443.
+# It exposes app containers only on localhost so /etc/nginx can reverse proxy them.
+services:
+  frontend:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+    env_file:
+      - path: ./env/frontend.env
+        required: true
+    ports:
+      - "127.0.0.1:3000:3000"
+    mem_limit: 768m
+    mem_reservation: 256m
+    cpus: 1.0
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 6
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  cms:
+    build:
+      context: ..
+      dockerfile: apps/cms/Dockerfile
+    env_file:
+      - path: ./env/cms.env
+        required: true
+    ports:
+      - "127.0.0.1:1337:1337"
+    volumes:
+      - cms_uploads:/opt/aivisionary/data/uploads
+    mem_limit: 1536m
+    mem_reservation: 512m
+    cpus: 1.5
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:1337/api/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 6
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  cms_uploads:

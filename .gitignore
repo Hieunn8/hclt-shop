@@ -24,6 +24,7 @@ playwright-report/
 artifacts-*.png
 aivisionary-release.zip
 backups/
+deploy/env/*.env
 
 # Rust build output for harness tooling.
 target/

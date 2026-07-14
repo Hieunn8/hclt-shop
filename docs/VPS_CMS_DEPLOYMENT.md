@@ -98,8 +98,8 @@ Nếu chưa có `pg_dump`, tạo backup bằng công cụ quản trị DB của 
 ## 4. Build và chạy CMS
 
 ```bash
-docker compose -f deploy/docker-compose.yml up -d --build cms
-docker compose -f deploy/docker-compose.yml logs -f cms
+docker compose -f deploy/docker-compose.host-nginx.yml up -d --build cms
+docker compose -f deploy/docker-compose.host-nginx.yml logs -f cms
 ```
 
 Mở admin:
@@ -175,8 +175,25 @@ Nếu thấy `mode":"dry-run"`, nghĩa là thiếu `STRAPI_API_TOKEN` hoặc `ST
 
 ## 8. Chạy frontend và Nginx
 
+Nếu VPS đang dùng host Nginx tại `/etc/nginx/conf.d/hieuchanlaptrinh.top.conf`, dùng config mẫu:
+
 ```bash
-docker compose -f deploy/docker-compose.yml up -d --build frontend nginx
+sudo cp /etc/nginx/conf.d/hieuchanlaptrinh.top.conf /etc/nginx/conf.d/hieuchanlaptrinh.top.conf.bak.$(date +%Y%m%d%H%M%S)
+sudo cp deploy/nginx/host-vps/hieuchanlaptrinh.top.conf /etc/nginx/conf.d/hieuchanlaptrinh.top.conf
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Trước khi reload, đảm bảo certificate hiện tại cover `cms.hieuchanlaptrinh.top`. Nếu chưa, mở rộng cert:
+
+```bash
+sudo certbot --nginx -d hieuchanlaptrinh.top -d www.hieuchanlaptrinh.top -d cms.hieuchanlaptrinh.top
+```
+
+Chạy app containers phía sau host Nginx:
+
+```bash
+docker compose -f deploy/docker-compose.host-nginx.yml up -d --build frontend cms
 ```
 
 Kiểm tra:
