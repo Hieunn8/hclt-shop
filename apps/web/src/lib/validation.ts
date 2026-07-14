@@ -29,6 +29,7 @@ export function tagsForRevalidate(model: string, slug?: string): string[] {
   if (normalized.includes("product")) return slug ? ["products", `product:${slug}`] : ["products"];
   if (normalized.includes("blog")) return slug ? ["blog-posts", `blog:${slug}`] : ["blog-posts"];
   if (normalized.includes("category")) return ["categories", "products"];
+  if (normalized.includes("policy")) return ["site-settings"];
   if (normalized.includes("faq")) return ["faqs"];
   if (normalized.includes("testimonial")) return ["testimonials"];
   if (normalized.includes("hero")) return ["hero-slides"];

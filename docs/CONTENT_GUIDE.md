@@ -27,6 +27,10 @@ Reviews should default to `pending`. Only approved reviews are visible publicly.
 
 The Public/API role should only read published content for products, categories, blog posts, policies, site settings, and health. Do not allow public create/update/delete on reviews or products. Review and contact submissions must pass through the frontend API routes.
 
+## Publish Flow
+
+After an editor publishes or updates product, category, blog post, policy, or site setting content, CMS lifecycle hooks call the frontend revalidation endpoint. If content does not update, check `FRONTEND_REVALIDATE_URL`, `REVALIDATE_SECRET`, and frontend route logs.
+
 ## Images
 
 Use owned or licensed images. Avoid SVG upload unless sanitization is enabled. Target WebP/AVIF for production media and keep thumbnails under the performance budget.

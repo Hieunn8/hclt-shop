@@ -13,5 +13,6 @@ describe("validation", () => {
   it("maps webhook models to allowed cache tags", () => {
     expect(tagsForRevalidate("product", "auto-reup-master")).toEqual(["products", "product:auto-reup-master"]);
     expect(tagsForRevalidate("blog-post", "toi-uu")).toEqual(["blog-posts", "blog:toi-uu"]);
+    expect(tagsForRevalidate("policy", "bao-mat")).toEqual(["site-settings"]);
   });
 });
