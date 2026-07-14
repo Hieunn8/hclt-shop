@@ -5,7 +5,7 @@
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "strapi build",
+    "build": "strapi build && node scripts/copy-content-type-schemas.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
