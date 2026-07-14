@@ -1,0 +1,21 @@
+{
+  "name": "aivisionary",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "dev": "pnpm --filter @aivisionary/web dev",
+    "lint": "pnpm --filter @aivisionary/web lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @aivisionary/web test",
+    "build": "pnpm --filter @aivisionary/web build",
+    "test:e2e": "pnpm --filter @aivisionary/web test:e2e",
+    "seed": "tsx scripts/seed-cms.ts",
+    "verify-env": "bash scripts/verify-env.sh"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

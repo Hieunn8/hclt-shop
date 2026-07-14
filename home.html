@@ -1,0 +1,569 @@
+<!DOCTYPE html><html class="dark" lang="vi"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e9ddff",
+                        "on-secondary": "#342b4b",
+                        "primary-container": "#6750a4",
+                        "inverse-surface": "#e6e0e9",
+                        "on-background": "#e6e0e9",
+                        "surface-container-high": "#2b292f",
+                        "secondary": "#cdc0e9",
+                        "secondary-container": "#4d4465",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#22005d",
+                        "on-primary": "#381e72",
+                        "surface-dim": "#141218",
+                        "tertiary": "#e7c365",
+                        "surface-container": "#211f24",
+                        "surface-bright": "#3b383e",
+                        "outline-variant": "#494551",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-surface-variant": "#cbc4d2",
+                        "on-surface": "#e6e0e9",
+                        "background": "#141218",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#bfb2da",
+                        "tertiary-container": "#c9a74d",
+                        "surface": "#141218",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-tint": "#cfbcff",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary-fixed": "#1f1635",
+                        "inverse-on-surface": "#322f35",
+                        "tertiary-fixed": "#ffdf93",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "primary": "#cfbcff",
+                        "surface-container-lowest": "#0f0d13",
+                        "on-tertiary": "#3e2e00",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "surface-container-highest": "#36343a",
+                        "surface-variant": "#36343a",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#1d1b20",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-tertiary-container": "#503d00",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "outline": "#948e9c",
+                        "secondary-fixed": "#e9ddff",
+                        "inverse-primary": "#6750a4",
+                        "on-primary-container": "#e0d2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    }catch(_e){}</script></head><body class="bg-background text-on-background font-body-md font-body-md min-h-screen ambient-bg flex flex-col relative overflow-x-hidden">
+<!-- 1. Marquee Promo Bar -->
+<div class="w-full bg-gradient-to-r from-primary-container to-secondary-container text-white py-1.5 font-label-sm text-label-sm marquee-container relative z-50">
+<div class="marquee-content uppercase tracking-wider">
+            🔥 Ưu đãi tháng 7: Giảm 20% tất cả Key AI - Áp dụng đến hết 31/07 🔥
+        </div>
+</div>
+<!-- 2. Global Header -->
+<header class="bg-surface/80 backdrop-blur-xl dark:bg-surface/80 fixed top-8 w-full z-40 flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto border-b border-white/10 shadow-sm transition-all duration-300" id="main-header">
+<div class="flex items-center gap-4">
+<img alt="AIVisionary Logo" class="h-10 w-10 object-contain rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJMcrKFKEgudOnl_OxqhEnDgFlPVDjaoER5XsU3T26kiP4i5OIYKf1W8cFy8Gkp51zr9MVzqtrS--_hnQ3O5hf0q3mxreRgtCT9nv_ya473sIKNuq4iK-w3vvwu0sBMotsc_NAbX6J2qHq6yKmIQ3-4FW94vDaAn07i8aH20s0YHwaDsiID0sQucaJSIrPS-d76FTpoh3p57gndTlQn2C4nDEfe9E0T3mV34Mq3IlAmf8T5l3aGtS2RT11hsU6-_w0jJggSIi5KaY">
+<span class="font-headline-md text-headline-md font-bold text-primary hidden sm:block">AIVisionary</span>
+</div>
+<!-- Web Nav -->
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md hover:text-primary transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant font-medium font-label-md text-label-md hover:text-primary transition-colors duration-200" href="#">Products</a>
+<a class="text-on-surface-variant font-medium font-label-md text-label-md hover:text-primary transition-colors duration-200" href="#">Pricing</a>
+<a class="text-on-surface-variant font-medium font-label-md text-label-md hover:text-primary transition-colors duration-200" href="#">Tutorials</a>
+<a class="text-on-surface-variant font-medium font-label-md text-label-md hover:text-primary transition-colors duration-200" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center glass-panel rounded-full px-4 py-2 border focus-within:border-cyan-400 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="bg-transparent border-none text-on-surface focus:ring-0 text-sm w-48 placeholder-on-surface-variant" placeholder="Search tools..." type="text">
+</div>
+<button class="btn-primary text-white font-label-md text-label-md px-6 py-2.5 rounded-full whitespace-nowrap hidden sm:block">Contact Now</button>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-margin-desktop w-full max-w-container-max mx-auto px-gutter flex flex-col gap-margin-desktop relative z-10">
+<!-- 3. Hero Carousel -->
+<section class="w-full min-h-[60vh] glass-panel rounded-2xl relative overflow-hidden group">
+<div class="slider-content h-full" id="hero-slider">
+<!-- Slide 1 -->
+<div class="slide flex flex-col md:flex-row items-center justify-between h-full relative">
+<div class="p-8 md:p-16 flex flex-col gap-6 w-full md:w-1/2 z-10">
+<span class="inline-block px-3 py-1 bg-primary/20 text-primary rounded-full font-label-sm text-label-sm w-max border border-primary/30">FEATURED MODEL V4.0</span>
+<h1 class="font-headline-xl text-headline-xl md:text-headline-xl text-on-surface">AI Voice Generator Pro</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Clone voices with ultra-realistic neural synthesis for your next viral video.</p>
+<div class="flex gap-4 mt-4">
+<button class="btn-primary text-white font-label-md text-label-md px-8 py-3 rounded-full flex items-center gap-2">
+<span>Xem chi tiết</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="w-full md:w-1/2 h-64 md:h-full absolute md:relative right-0 overflow-hidden">
+<div class="bg-cover bg-center w-full h-full absolute inset-0 opacity-40 md:opacity-80 mix-blend-screen" data-alt="Futuristic AI Voice generator visualization" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDG30jOSkV85u8zq-XsJV3OADkRcu3t-t23qeIO1FuB6Wog5htC0Z6W7zT65yLUqUGl4v5x2S7BveIsnzPpKKgOpnFtu7xsANFd4G2EPEsok9Ymh9TfHIm03EniaWBZUtv0foAQs0F_2a8od-mGhnx86bF-rqC2XmX7bmeHYqhswhcaHrKTG7dUoJHy1zZ38mYrQIOyZR7j5yw-Rf-kInDVAdlGIqeCshUDCJJ-wf8UlHJUfRyHyktYasXv92riXzLn0hQQKER50nM')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-high/90 to-transparent md:hidden"></div>
+<div class="absolute inset-0 bg-gradient-to-l from-transparent to-surface-container-high/90 hidden md:block"></div>
+<div class="absolute top-1/4 right-1/4 bg-primary/20 backdrop-blur-md border border-primary/50 text-white px-4 py-2 rounded-full font-label-sm text-sm floating-badge shadow-[0_0_15px_rgba(207,188,255,0.3)] z-20 hidden md:block">99% Giống giọng thật</div>
+<div class="absolute bottom-1/4 right-10 bg-cyan-500/20 backdrop-blur-md border border-cyan-400/50 text-white px-4 py-2 rounded-full font-label-sm text-sm floating-badge shadow-[0_0_15px_rgba(34,211,238,0.3)] z-20 hidden md:block" style="animation-delay: 1.5s;">Hỗ trợ 50+ ngôn ngữ</div>
+</div>
+</div>
+<!-- Slide 2 -->
+<div class="slide flex flex-col md:flex-row items-center justify-between h-full relative">
+<div class="p-8 md:p-16 flex flex-col gap-6 w-full md:w-1/2 z-10">
+<span class="inline-block px-3 py-1 bg-tertiary-container/20 text-tertiary-container rounded-full font-label-sm text-label-sm w-max border border-tertiary-container/30">BEST SELLER</span>
+<h1 class="font-headline-xl text-headline-xl md:text-headline-xl text-on-surface">Auto Reup Master</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Automate your content pipeline with intelligent re-uploading and dubbing.</p>
+<div class="flex gap-4 mt-4">
+<button class="btn-primary text-white font-label-md text-label-md px-8 py-3 rounded-full flex items-center gap-2">
+<span>Xem chi tiết</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="w-full md:w-1/2 h-64 md:h-full absolute md:relative right-0 overflow-hidden">
+<img alt="Auto Reup Master UI" class="w-full h-full object-cover opacity-40 md:opacity-80 mix-blend-screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARj5vYGlY_cw7CcTnCEptu4y40d2_uidfe2Z8kjZqc_p8jbTopLRS6r1m4JcwMRKkG0T1r_wfeeBn4uspj8k2_OP3uqrYxtWDaAxsueG_CXCAP2dB2rOqLnI0GrQlHF2Pk-I9iBpkTjxbsNS2lhnFZ5XG6txVg2ablkfYoJo-Q6wapOVHaOSdVv3SQ8Ycwip5YZ69exdHaOu21Ms0NJFUHvJ0pedmIFjRClYTe8c_n7MRdQi896uwSt95JCSWt0M-_2n0adV6NCvU">
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-high/90 to-transparent md:hidden"></div>
+<div class="absolute inset-0 bg-gradient-to-l from-transparent to-surface-container-high/90 hidden md:block"></div>
+<div class="absolute top-1/3 right-1/4 bg-tertiary/20 backdrop-blur-md border border-tertiary/50 text-white px-4 py-2 rounded-full font-label-sm text-sm floating-badge shadow-[0_0_15px_rgba(231,195,101,0.3)] z-20 hidden md:block">Tự động 100%</div>
+</div>
+</div>
+<!-- Slide 3 -->
+<div class="slide flex flex-col md:flex-row items-center justify-between h-full relative">
+<div class="p-8 md:p-16 flex flex-col gap-6 w-full md:w-1/2 z-10">
+<span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full font-label-sm text-label-sm w-max border border-cyan-500/30">NEW RELEASE</span>
+<h1 class="font-headline-xl text-headline-xl md:text-headline-xl text-on-surface">Deep Transcribe</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">High-accuracy AI voice to text conversion for professional workflows.</p>
+<div class="flex gap-4 mt-4">
+<button class="btn-primary text-white font-label-md text-label-md px-8 py-3 rounded-full flex items-center gap-2">
+<span>Xem chi tiết</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="w-full md:w-1/2 h-64 md:h-full absolute md:relative right-0 overflow-hidden">
+<img alt="Deep Transcribe UI" class="w-full h-full object-cover opacity-40 md:opacity-80 mix-blend-screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9sAVS49m_PQZnJZwhHaKq5EnquuqXi6Os-nepvf3KeSGRqRBzrE-2M4_yBHOzC9-XpMNt74uygT3enmG3YdhkO--LiZoJgKJeke5ZtBFkS_8NYVCo-c44xdjsStOZ_vb-al2AM_dS6n1ZVyjlugTuRoFtNE92mQOgeHHWbWcnSYUkec-bZu4fbnjpfpDbjJhUGyz6E02zgPu3TwpXSSESWzW7UV-SS3zQFFNEpyZrgWzlAaOG4THr0qhWi0sBhGkC4UjI58JLY_c">
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-high/90 to-transparent md:hidden"></div>
+<div class="absolute inset-0 bg-gradient-to-l from-transparent to-surface-container-high/90 hidden md:block"></div>
+<div class="absolute top-1/4 right-1/4 bg-primary/20 backdrop-blur-md border border-primary/50 text-white px-4 py-2 rounded-full font-label-sm text-sm floating-badge shadow-[0_0_15px_rgba(207,188,255,0.3)] z-20 hidden md:block">Độ chính xác 99%</div>
+</div>
+</div>
+</div>
+<!-- Controls -->
+<button class="absolute left-6 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 border border-white/10 text-white w-12 h-12 rounded-full backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 hover:scale-110" id="prev-slide">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<button class="absolute right-6 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 border border-white/10 text-white w-12 h-12 rounded-full backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 hover:scale-110" id="next-slide">
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</button>
+<!-- Carousel Indicators -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20" id="slider-dots">
+<button class="w-8 h-1.5 rounded-full bg-gradient-to-r from-primary-container to-secondary-container transition-all"></button>
+<button class="w-2 h-1.5 rounded-full bg-surface-variant transition-all"></button>
+<button class="w-2 h-1.5 rounded-full bg-surface-variant transition-all"></button>
+</div>
+</section>
+<!-- Trust Signals -->
+<section class="w-full bg-surface-container-low rounded-xl py-8 px-6 border border-white/5">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-3xl text-primary mb-1" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-headline-lg text-headline-md text-on-surface font-bold">10,000+</span>
+<span class="text-sm font-label-md text-on-surface-variant">Khách hàng</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-3xl text-tertiary mb-1" style="font-variation-settings: 'FILL' 1;">vpn_key</span>
+<span class="font-headline-lg text-headline-md text-on-surface font-bold">50,000+</span>
+<span class="text-sm font-label-md text-on-surface-variant">Key đã bán</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-3xl text-yellow-400 mb-1" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-headline-lg text-headline-md text-on-surface font-bold">4.9/5</span>
+<span class="text-sm font-label-md text-on-surface-variant">Đánh giá trung bình</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-3xl text-cyan-400 mb-1" style="font-variation-settings: 'FILL' 1;">support_agent</span>
+<span class="font-headline-lg text-headline-md text-on-surface font-bold">24/7</span>
+<span class="text-sm font-label-md text-on-surface-variant">Hỗ trợ trực tuyến</span>
+</div>
+</div>
+</section>
+<!-- 4. Product Categories (Bento Grid) -->
+<section class="flex flex-col gap-8 w-full mt-8">
+<div class="flex flex-col gap-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Các công cụ AI hỗ trợ Content Creator</h2>
+<p class="text-on-surface-variant font-body-md">Empower your workflow with state-of-the-art neural tools.</p>
+</div>
+<!-- Tabs -->
+<div class="flex gap-2 overflow-x-auto pb-4 hide-scrollbar">
+<button class="glass-panel px-6 py-2 rounded-full font-label-md text-label-md border-primary/50 text-primary">Text to Speech</button>
+<button class="glass-panel px-6 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Speech to Text</button>
+<button class="glass-panel px-6 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Reup Video</button>
+<button class="glass-panel px-6 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Review Phim AI</button>
+<button class="glass-panel px-6 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Key &amp; Code</button>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="glass-panel rounded-xl p-6 flex flex-col gap-3 group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden h-full">
+<div class="absolute top-0 right-0 bg-error-container text-on-error-container text-[10px] font-bold px-3 py-1 rounded-bl-lg z-10">HOT</div>
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center border border-white/5 mb-1 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">mic</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface">Neural TTS Basic</h3>
+<p class="text-sm text-on-surface-variant">Chuyển văn bản thành giọng nói tự nhiên, đa ngôn ngữ</p>
+<div class="flex items-center text-xs text-on-surface-variant mb-2">
+<span class="text-yellow-400 mr-1">⭐</span> 4.8 (120 đánh giá)
+</div>
+<div class="flex items-end gap-2 mt-auto">
+<span class="font-bold text-xl text-primary">$19<span class="text-sm font-normal">/mo</span></span>
+<span class="text-sm text-on-surface-variant line-through mb-1">$29</span>
+</div>
+<button class="w-full btn-primary text-white py-2 rounded-lg font-label-sm mt-2">Mua ngay</button>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel rounded-xl p-6 flex flex-col gap-3 group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden h-full">
+<div class="absolute top-0 right-0 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold px-3 py-1 rounded-bl-lg z-10">BÁN CHẠY</div>
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center border border-white/5 mb-1 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">video_library</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface">Auto Reup Master</h3>
+<p class="text-sm text-on-surface-variant">Tự động thay sub, dịch giọng nói cho video reup</p>
+<div class="flex items-center text-xs text-on-surface-variant mb-2">
+<span class="text-yellow-400 mr-1">⭐</span> 4.9 (345 đánh giá)
+</div>
+<div class="flex items-end gap-2 mt-auto">
+<span class="font-bold text-xl text-primary">$49<span class="text-sm font-normal">/mo</span></span>
+</div>
+<button class="w-full glass-panel hover:bg-surface-variant text-white py-2 rounded-lg font-label-sm mt-2 transition-colors">Mua ngay</button>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel rounded-xl p-6 flex flex-col gap-3 group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden h-full">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center border border-white/5 mb-1 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">closed_caption</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface">Deep Transcribe</h3>
+<p class="text-sm text-on-surface-variant">Chuyển giọng nói thành văn bản chính xác 99%</p>
+<div class="flex items-center text-xs text-on-surface-variant mb-2">
+<span class="text-yellow-400 mr-1">⭐</span> 4.7 (89 đánh giá)
+</div>
+<div class="flex items-end gap-2 mt-auto">
+<span class="font-bold text-xl text-primary">$15<span class="text-sm font-normal">/mo</span></span>
+</div>
+<button class="w-full glass-panel hover:bg-surface-variant text-white py-2 rounded-lg font-label-sm mt-2 transition-colors">Mua ngay</button>
+</div>
+<!-- Card 4 -->
+<div class="glass-panel rounded-xl p-6 flex flex-col gap-3 group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden h-full">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center border border-white/5 mb-1 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">movie</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface">Film Review AI</h3>
+<p class="text-sm text-on-surface-variant">Tạo kịch bản review phim tự động bằng AI</p>
+<div class="flex items-center text-xs text-on-surface-variant mb-2">
+<span class="text-yellow-400 mr-1">⭐</span> 5.0 (212 đánh giá)
+</div>
+<div class="flex items-end gap-2 mt-auto">
+<span class="font-bold text-xl text-primary">$99<span class="text-sm font-normal">/life</span></span>
+</div>
+<button class="w-full glass-panel hover:bg-surface-variant text-white py-2 rounded-lg font-label-sm mt-2 transition-colors">Mua ngay</button>
+</div>
+</div>
+<div class="flex justify-center mt-6">
+<button class="glass-panel border border-primary/30 hover:border-primary text-on-surface hover:text-primary px-8 py-3 rounded-full transition-colors font-label-md">Xem tất cả sản phẩm</button>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="flex flex-col gap-8 w-full mt-12">
+<h2 class="font-headline-lg text-headline-lg text-on-surface text-center">Khách hàng nói gì về chúng tôi</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">T</div>
+<div>
+<h4 class="font-label-md text-on-surface">Trần Nam</h4>
+<div class="text-yellow-400 text-xs">⭐⭐⭐⭐⭐</div>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm italic">"Công cụ Auto Reup thực sự tiết kiệm cho tôi hàng chục giờ mỗi tuần. Rất đáng đồng tiền bát gạo!"</p>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary font-bold">H</div>
+<div>
+<h4 class="font-label-md text-on-surface">Hoàng Yến</h4>
+<div class="text-yellow-400 text-xs">⭐⭐⭐⭐⭐</div>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm italic">"Giọng đọc AI quá chân thực, khách hàng của mình không nhận ra là máy đọc. Ủng hộ shop dài dài."</p>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">M</div>
+<div>
+<h4 class="font-label-md text-on-surface">Minh Quân</h4>
+<div class="text-yellow-400 text-xs">⭐⭐⭐⭐</div>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm italic">"Support rất nhiệt tình, lúc nửa đêm mình cài lỗi vẫn được team hỗ trợ qua ultraview. Rất hài lòng."</p>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="flex flex-col gap-8 w-full mt-16 max-w-3xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-surface text-center">Câu hỏi thường gặp</h2>
+<div class="flex flex-col gap-4">
+<!-- Item 1 -->
+<details class="glass-panel rounded-xl group">
+<summary class="flex justify-between items-center font-label-md p-5 cursor-pointer list-none text-on-surface">
+<span>Làm thế nào để mua hàng?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined">expand_more</span>
+</summary>
+<div class="text-on-surface-variant text-sm px-5 pb-5 mt-2">
+                Bạn chỉ cần chọn sản phẩm, click "Mua ngay" và làm theo hướng dẫn thanh toán. Key sẽ được gửi tự động.
+            </div>
+</details>
+<!-- Item 2 -->
+<details class="glass-panel rounded-xl group">
+<summary class="flex justify-between items-center font-label-md p-5 cursor-pointer list-none text-on-surface">
+<span>Thời gian giao Key là bao lâu?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined">expand_more</span>
+</summary>
+<div class="text-on-surface-variant text-sm px-5 pb-5 mt-2">
+                Hệ thống giao Key tự động qua email hoặc Zalo của bạn ngay lập tức sau khi thanh toán thành công (thường dưới 1 phút).
+            </div>
+</details>
+<!-- Item 3 -->
+<details class="glass-panel rounded-xl group">
+<summary class="flex justify-between items-center font-label-md p-5 cursor-pointer list-none text-on-surface">
+<span>Chính sách bảo hành như thế nào?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined">expand_more</span>
+</summary>
+<div class="text-on-surface-variant text-sm px-5 pb-5 mt-2">
+                Bảo hành 1 đổi 1 trong suốt thời gian sử dụng đối với các lỗi từ nhà sản xuất hoặc key bị lỗi không kích hoạt được.
+            </div>
+</details>
+<!-- Item 4 -->
+<details class="glass-panel rounded-xl group">
+<summary class="flex justify-between items-center font-label-md p-5 cursor-pointer list-none text-on-surface">
+<span>Có hỗ trợ cài đặt không?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined">expand_more</span>
+</summary>
+<div class="text-on-surface-variant text-sm px-5 pb-5 mt-2">
+                Có, đội ngũ kỹ thuật của chúng tôi hỗ trợ cài đặt qua Ultraviewer/AnyDesk hoàn toàn miễn phí 24/7.
+            </div>
+</details>
+<!-- Item 5 -->
+<details class="glass-panel rounded-xl group">
+<summary class="flex justify-between items-center font-label-md p-5 cursor-pointer list-none text-on-surface">
+<span>Có những hình thức thanh toán nào?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined">expand_more</span>
+</summary>
+<div class="text-on-surface-variant text-sm px-5 pb-5 mt-2">
+                Chúng tôi chấp nhận chuyển khoản Ngân hàng (Vietcombank, Techcombank, MB), Ví Momo, và VNPay.
+            </div>
+</details>
+</div>
+</section>
+<!-- Blog Section -->
+<section class="flex flex-col gap-8 w-full mt-16">
+<div class="flex flex-col gap-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Kiến thức &amp; Thủ thuật AI cho Content Creator</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Post 1 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col group hover:-translate-y-1 transition-transform duration-300">
+<div class="h-48 overflow-hidden">
+<img alt="Blog 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvrWtWoaeBgcNvmvEZ8b8NjxYkmc2mbeJt3aPsbgJtbBOtEdeRlJrYxpA40JGVOC-14djeECaXokhOGo1DElx2dMJPrfuiob6o2lN2QhEEn7jeSsaZVpwxXdFBarU6k1JI_r9FYK8gI8eqZtF3-lBTVFsVqMvUd6R_JKrFugmZ27vM9jdSN5gEItMI1H29BQfhY3pAqWFQc7cRSEmxNcVKDs-LLJ3AQKK_jtpTvMtM4x_ZB72Kp0ZfW9ROheV15FK3UFVyTU8PlOc">
+</div>
+<div class="p-6 flex flex-col gap-3 flex-grow">
+<span class="text-xs text-primary font-label-sm">15 Tháng 7, 2024</span>
+<h3 class="font-headline-md text-lg text-on-surface line-clamp-2">Hướng dẫn tạo kịch bản Tiktok triệu view với ChatGPT</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 flex-grow">Khám phá các prompt thần thánh giúp bạn viết kịch bản video viral chỉ trong 5 phút...</p>
+<button class="text-primary font-label-md text-sm text-left mt-2 hover:text-primary-fixed transition-colors flex items-center gap-1">Đọc thêm <span class="material-symbols-outlined text-[16px]">arrow_forward</span></button>
+</div>
+</div>
+<!-- Post 2 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col group hover:-translate-y-1 transition-transform duration-300">
+<div class="h-48 overflow-hidden">
+<img alt="Blog 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqx13rbZ3gHHVmJsFmBRYY1o7rCC3x9oRJO1uWbOAliUyYf9xsoZ3GCvSPHuflqUVyuRt_LHoHjbp1In0q7maQo0b-h2X6RDDKTWBZVRBu2xTQBRMNRgle-jtHfISUEs7X5MUzuGHXuVI74YNqXo1ddcItqH11tyMVheTkpBI9o3_NwyPEUMM828I70oidiiyGyD66bCpQ8FAehpYL-zzyOLMohgS28XtS9ahfhDMNTGxvu_Gfapx53m9FqZuPVMLTnDt1pQ1Qjc0">
+</div>
+<div class="p-6 flex flex-col gap-3 flex-grow">
+<span class="text-xs text-primary font-label-sm">10 Tháng 7, 2024</span>
+<h3 class="font-headline-md text-lg text-on-surface line-clamp-2">So sánh các công cụ chuyển văn bản thành giọng nói</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 flex-grow">Đánh giá chi tiết 5 công cụ TTS phổ biến nhất hiện nay dành cho Youtuber và Tiktoker...</p>
+<button class="text-primary font-label-md text-sm text-left mt-2 hover:text-primary-fixed transition-colors flex items-center gap-1">Đọc thêm <span class="material-symbols-outlined text-[16px]">arrow_forward</span></button>
+</div>
+</div>
+<!-- Post 3 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col group hover:-translate-y-1 transition-transform duration-300">
+<div class="h-48 overflow-hidden">
+<img alt="Blog 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBbAKb0TQtm_ijn-x3ZMELC7jtLpr49laNRIqDWpjavnpIpAqasH07eq18Uk_zDHFtEv3ppocbdtUXKEQqN4B3PdDbzFFawiamF-Fxx-RePWgdsJxTndmlxQB3NBRTSlQV6xKIQhcv3TZ1GSa-qv5bNh45JteE-SwJQKCC8HtxKOPZ98Cec1xwyafuBHzdZ1hp-RbsQIlJTlc9G1HVkBuLA9nanEyBZ1l_vqV8vFZVomtNSB3-b9nxiJ4skrl-MXpHAQkJ5WN2ukQ">
+</div>
+<div class="p-6 flex flex-col gap-3 flex-grow">
+<span class="text-xs text-primary font-label-sm">05 Tháng 7, 2024</span>
+<h3 class="font-headline-md text-lg text-on-surface line-clamp-2">Bí kíp reup video Youtube không lo gậy bản quyền</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 flex-grow">Cách sử dụng Auto Reup Master kết hợp với các kỹ thuật lách bản quyền hiệu quả...</p>
+<button class="text-primary font-label-md text-sm text-left mt-2 hover:text-primary-fixed transition-colors flex items-center gap-1">Đọc thêm <span class="material-symbols-outlined text-[16px]">arrow_forward</span></button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- 8. Global Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest w-full border-t border-outline-variant mt-24 relative z-10">
+<div class="w-full px-gutter py-margin-desktop grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-container-max mx-auto justify-items-start lg:justify-items-center text-left">
+<div class="flex flex-col gap-3 w-full">
+<h4 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-widest mb-2">Legal</h4>
+<a class="text-on-surface-variant hover:text-tertiary transition-colors text-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-tertiary transition-colors text-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-tertiary transition-colors text-sm" href="#">Refund Policy</a>
+</div>
+<div class="flex flex-col gap-3 w-full">
+<h4 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-widest mb-2">Payment</h4>
+<a class="text-on-surface-variant hover:text-tertiary transition-colors text-sm flex items-center gap-2" href="#"><span class="material-symbols-outlined text-sm">account_balance_wallet</span> Momo</a>
+<a class="text-on-surface-variant hover:text-tertiary transition-colors text-sm flex items-center gap-2" href="#"><span class="material-symbols-outlined text-sm">account_balance</span> Bank Transfer</a>
+</div>
+<div class="flex flex-col gap-3 w-full">
+<h4 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-widest mb-2">Liên hệ</h4>
+<a class="text-primary font-headline-md font-bold hover:text-primary-fixed transition-colors" href="tel:1900xxxx">1900 xxxx</a>
+<a class="text-on-surface-variant hover:text-cyan-400 transition-colors text-sm flex items-center gap-2" href="#"><span class="material-symbols-outlined text-sm">chat</span> Zalo Hỗ trợ</a>
+<a class="text-on-surface-variant hover:text-blue-500 transition-colors text-sm flex items-center gap-2" href="#"><span class="material-symbols-outlined text-sm">public</span> Facebook Fanpage</a>
+<a class="text-on-surface-variant hover:text-tertiary transition-colors text-sm flex items-center gap-2" href="mailto:support@aivisionary.com"><span class="material-symbols-outlined text-sm">mail</span> support@aivisionary.com</a>
+</div>
+<div class="flex flex-col gap-3 h-32 w-full rounded-lg overflow-hidden glass-panel relative lg:justify-self-end max-w-[300px]">
+<div class="bg-cover bg-center w-full h-full opacity-60" data-alt="A highly stylized, minimalist digital map visualization of Ho Chi Minh City, rendered in dark mode with glowing cyan and deep purple accents representing data flows and tech hubs. The aesthetic is modern, sleek, and high-tech, fitting a visionary AI brand." data-location="Ho Chi Minh City" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2Z4f7eBdNlSE15pyjO-VVGZUcLixaghRsZYZlluMXkSZ5xrPylnl1NspXAY2_Iogay7HZudNczBOubFPyFQSeaBwBFamIJxOwmf07jyetz4r_1yKZvc350RXMh8GoAMIr-0CRIa34l0HiDelABJ2VbZL9zBLPDmn1UDuJYtkBtrgItRD4A69XXD-KAihiTtShwBXHTSB8ovKyCWjG1jLNVdUY_orXaYH3Y6EPUNEeAxwqsFG77tQfv4KBjBLfsBcIw0SAbLGeir4')"></div>
+</div>
+</div>
+<div class="w-full text-center py-4 border-t border-white/5 text-xs text-on-surface-variant flex flex-col md:flex-row items-center justify-center gap-4 px-gutter max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-lg text-primary font-bold">AIVisionary</span>
+<span>- Empowering Neural Creativity.</span>
+</div>
+<span>© 2024 AIVisionary.</span>
+</div>
+</footer>
+<!-- 9. Sticky Nav / FABs -->
+<div class="fixed bottom-8 right-8 z-50 flex flex-col items-center space-y-4">
+<!-- Back to top -->
+<button aria-label="Back to top" class="bg-surface-variant text-on-surface-variant rounded-full p-3 shadow-md hover:scale-110 hover:text-primary transition-all flex items-center justify-center" id="back-to-top" style="opacity: 0; pointer-events: none;">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">keyboard_arrow_up</span>
+</button>
+<!-- Zalo -->
+<button aria-label="Zalo" class="bg-secondary-container text-on-secondary-container rounded-full p-4 shadow-md hover:scale-110 hover:shadow-cyan-400/40 transition-all flex items-center justify-center pulse-glow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+</button>
+<!-- Messenger -->
+<button aria-label="Messenger" class="bg-secondary-container text-on-secondary-container rounded-full p-4 shadow-md hover:scale-110 hover:shadow-cyan-400/40 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forum</span>
+</button>
+<!-- Call -->
+<button aria-label="Call" class="bg-primary text-on-primary rounded-full p-4 shadow-lg hover:scale-110 hover:shadow-cyan-400/40 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">call</span>
+</button>
+</div>
+<script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-2', 'shadow-md', 'bg-surface/95');
+                header.classList.remove('py-4', 'shadow-sm', 'top-8', 'bg-surface/80');
+                header.classList.add('top-0');
+            } else {
+                header.classList.add('py-4', 'shadow-sm', 'top-8', 'bg-surface/80');
+                header.classList.remove('py-2', 'shadow-md', 'top-0', 'bg-surface/95');
+            }
+        });
+
+        // Back to top button logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.opacity = '1';
+                backToTopBtn.style.pointerEvents = 'auto';
+            } else {
+                backToTopBtn.style.opacity = '0';
+                backToTopBtn.style.pointerEvents = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Simple Slider Logic
+        const sliderContent = document.getElementById('hero-slider');
+        const prevBtn = document.getElementById('prev-slide');
+        const nextBtn = document.getElementById('next-slide');
+        const dots = document.getElementById('slider-dots').children;
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function updateSlider() {
+            sliderContent.style.transform = `translateX(-${currentSlide * 33.333}%)`;
+            
+            // Update dots
+            for(let i=0; i<dots.length; i++) {
+                if(i === currentSlide) {
+                    dots[i].className = "w-8 h-1.5 rounded-full bg-gradient-to-r from-primary-container to-secondary-container transition-all";
+                } else {
+                    dots[i].className = "w-2 h-1.5 rounded-full bg-surface-variant transition-all cursor-pointer";
+                }
+            }
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        });
+
+        // Auto advance
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 5000);
+    </script>
+</body></html>

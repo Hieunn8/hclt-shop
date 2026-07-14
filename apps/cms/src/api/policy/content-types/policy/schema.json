@@ -1,0 +1,12 @@
+{
+  "kind": "collectionType",
+  "collectionName": "policies",
+  "info": { "singularName": "policy", "pluralName": "policies", "displayName": "Policy" },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "content": { "type": "blocks" },
+    "seoDescription": { "type": "text" }
+  }
+}

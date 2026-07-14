@@ -1,0 +1,8 @@
+services:
+  frontend:
+    command: pnpm --filter @aivisionary/web dev
+    ports:
+      - "3000:3000"
+  cms:
+    ports:
+      - "1337:1337"

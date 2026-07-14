@@ -1,0 +1,20 @@
+{
+  "name": "@aivisionary/cms",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@strapi/strapi": "^5.6.0",
+    "pg": "^8.13.1",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.9.3"
+  }
+}

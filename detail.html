@@ -1,0 +1,492 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#141218",
+                        "outline": "#948e9c",
+                        "error-container": "#93000a",
+                        "secondary-container": "#4d4465",
+                        "on-secondary-container": "#bfb2da",
+                        "surface-dim": "#141218",
+                        "on-primary-container": "#e0d2ff",
+                        "inverse-on-surface": "#322f35",
+                        "on-primary-fixed": "#22005d",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#211f24",
+                        "surface-container-low": "#1d1b20",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-secondary-fixed": "#1f1635",
+                        "tertiary-fixed": "#ffdf93",
+                        "tertiary": "#e7c365",
+                        "surface-container-lowest": "#0f0d13",
+                        "on-background": "#e6e0e9",
+                        "on-secondary": "#342b4b",
+                        "primary-container": "#6750a4",
+                        "on-tertiary": "#3e2e00",
+                        "on-error": "#690005",
+                        "inverse-surface": "#e6e0e9",
+                        "on-tertiary-container": "#503d00",
+                        "secondary": "#cdc0e9",
+                        "outline-variant": "#494551",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "inverse-primary": "#6750a4",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#e9ddff",
+                        "tertiary-container": "#c9a74d",
+                        "surface-container-high": "#2b292f",
+                        "primary-fixed-dim": "#cfbcff",
+                        "surface-tint": "#cfbcff",
+                        "primary": "#cfbcff",
+                        "secondary-fixed": "#e9ddff",
+                        "on-primary": "#381e72",
+                        "surface-bright": "#3b383e",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "surface-container-highest": "#36343a",
+                        "on-surface-variant": "#cbc4d2",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "background": "#141218",
+                        "on-surface": "#e6e0e9",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-variant": "#36343a",
+                        "on-tertiary-fixed-variant": "#594400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "headline-xl": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    }catch(_e){}</script></head><body class="antialiased font-body-md text-body-md bg-background text-on-surface">
+<div class="bg-plasma"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto bg-surface/80 backdrop-blur-xl dark:bg-surface/80 shadow-sm border-b border-white/10">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">AIVisionary</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Home</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 active" href="#">Products</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Pricing</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Tutorials</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+</button>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+<button class="hidden md:flex items-center justify-center px-4 py-2 bg-primary-container text-on-primary-container rounded-full font-label-md hover:opacity-90 transition-opacity">Contact Now</button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-gutter max-w-container-max mx-auto">
+<!-- Breadcrumb -->
+<div class="flex items-center gap-2 text-sm text-on-surface-variant mb-8">
+<a class="hover:text-primary transition-colors" href="#">Trang chủ</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Sản phẩm</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-on-surface font-medium">Auto Reup Master</span>
+</div>
+<!-- Product Hero Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+<!-- Gallery & Media (Left) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Main Image -->
+<div class="relative w-full rounded-xl overflow-hidden glass-panel group aspect-video" id="main-media-container">
+<img alt="Auto Reup Master Hero Banner" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARj5vYGlY_cw7CcTnCEptu4y40d2_uidfe2Z8kjZqc_p8jbTopLRS6r1m4JcwMRKkG0T1r_wfeeBn4uspj8k2_OP3uqrYxtWDaAxsueG_CXCAP2dB2rOqLnI0GrQlHF2Pk-I9iBpkTjxbsNS2lhnFZ5XG6txVg2ablkfYoJo-Q6wapOVHaOSdVv3SQ8Ycwip5YZ69exdHaOu21Ms0NJFUHvJ0pedmIFjRClYTe8c_n7MRdQi896uwSt95JCSWt0M-_2n0adV6NCvU">
+</div>
+<!-- Thumbnails Grid -->
+<div class="grid grid-cols-4 gap-4">
+<button class="rounded-lg overflow-hidden border-2 border-primary" onclick="swapToImage('https://lh3.googleusercontent.com/aida-public/AB6AXuARj5vYGlY_cw7CcTnCEptu4y40d2_uidfe2Z8kjZqc_p8jbTopLRS6r1m4JcwMRKkG0T1r_wfeeBn4uspj8k2_OP3uqrYxtWDaAxsueG_CXCAP2dB2rOqLnI0GrQlHF2Pk-I9iBpkTjxbsNS2lhnFZ5XG6txVg2ablkfYoJo-Q6wapOVHaOSdVv3SQ8Ycwip5YZ69exdHaOu21Ms0NJFUHvJ0pedmIFjRClYTe8c_n7MRdQi896uwSt95JCSWt0M-_2n0adV6NCvU')">
+<img alt="Thumbnail 1" class="w-full h-24 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARj5vYGlY_cw7CcTnCEptu4y40d2_uidfe2Z8kjZqc_p8jbTopLRS6r1m4JcwMRKkG0T1r_wfeeBn4uspj8k2_OP3uqrYxtWDaAxsueG_CXCAP2dB2rOqLnI0GrQlHF2Pk-I9iBpkTjxbsNS2lhnFZ5XG6txVg2ablkfYoJo-Q6wapOVHaOSdVv3SQ8Ycwip5YZ69exdHaOu21Ms0NJFUHvJ0pedmIFjRClYTe8c_n7MRdQi896uwSt95JCSWt0M-_2n0adV6NCvU">
+</button>
+<button class="rounded-lg overflow-hidden border border-white/10 hover:border-primary/50 transition-colors opacity-70 hover:opacity-100" onclick="swapToImage('https://lh3.googleusercontent.com/aida-public/AB6AXuDy-Umhlen_4JfunDCB4WPQY8xCWzEBUeOU745rRCOsyTUwWcDeebRVYmF5r1o21J_wHytZ7ao_fLKXglZwjBmTCVsNNZ6uVMA3EHv-BBZrL809qx0Kg68-9n21wcoohOkJquDPKE64AYms3MB3rn1eyTdsnRd40TzTfP4sL5yK-oD-p-RpzKTDujet4CxseyP11MloTeZQaWkzaOkIAFfw6up2O24Nnwhzloi1fnp2p9HrSslwjl_jYQs4XijUAVq94svqRtpp2bc')">
+<img class="w-full h-24 object-cover" data-alt="Close up of AI settings interface, dark theme with glowing neon blue toggles, sleek modern layout, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy-Umhlen_4JfunDCB4WPQY8xCWzEBUeOU745rRCOsyTUwWcDeebRVYmF5r1o21J_wHytZ7ao_fLKXglZwjBmTCVsNNZ6uVMA3EHv-BBZrL809qx0Kg68-9n21wcoohOkJquDPKE64AYms3MB3rn1eyTdsnRd40TzTfP4sL5yK-oD-p-RpzKTDujet4CxseyP11MloTeZQaWkzaOkIAFfw6up2O24Nnwhzloi1fnp2p9HrSslwjl_jYQs4XijUAVq94svqRtpp2bc">
+</button>
+<button class="rounded-lg overflow-hidden border border-white/10 hover:border-primary/50 transition-colors opacity-70 hover:opacity-100" onclick="swapToImage('https://lh3.googleusercontent.com/aida-public/AB6AXuDFMS46GG0rOuW9oku1w5G-nlta-Jgb_HlDS8vMHOjTGPOUzpqZr1w7SWOsDDic7G0AQ_4nKF78J5PBJPTOygimeZryNFRpUYR5l2bQNcJ1euza1v51SBjIURH4lMioNHQ3pnEZQve3KgFkZbtPTxq9otzfwclRiNom5D2hZ3AueqVrt05qg7kwijRWU6j_3wsn-4eK5-zD-1Q7TPdtj7KLMxhtHGG6AXT5MlzkT0LJI6ECRNkxhcrJoyBfXXuHPGb3VToEnUqSM6Q')">
+<img class="w-full h-24 object-cover" data-alt="Screenshot of timeline video editor within the software, futuristic dark mode, purple audio waveforms." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFMS46GG0rOuW9oku1w5G-nlta-Jgb_HlDS8vMHOjTGPOUzpqZr1w7SWOsDDic7G0AQ_4nKF78J5PBJPTOygimeZryNFRpUYR5l2bQNcJ1euza1v51SBjIURH4lMioNHQ3pnEZQve3KgFkZbtPTxq9otzfwclRiNom5D2hZ3AueqVrt05qg7kwijRWU6j_3wsn-4eK5-zD-1Q7TPdtj7KLMxhtHGG6AXT5MlzkT0LJI6ECRNkxhcrJoyBfXXuHPGb3VToEnUqSM6Q">
+</button>
+<button class="rounded-lg overflow-hidden border border-white/10 hover:border-primary/50 transition-colors opacity-70 hover:opacity-100 relative" onclick="swapImageForVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+<img alt="Video Demo Thumbnail" class="w-full h-24 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAcGVKRMka4wxewXtR7GjhMKRXQf0vIhxHaS53TQKzuUdUtpYB9lvdpIcGVZCIfNyo1oaegg1KNwzakXULOE32px_okigP4wTJYYm6GctlP4TUUVsxkf9Pb_WyBBLejdd41c1Kn2cLy8MT_XB3M0H9STfYKaa5Iv_In56SGpjC1aL1cBDIDgFWxsYaDYmXhH5ZTekxkxunHFTH73_3waJnRJFas97Woe6NDQLms_DWzfJKgb7T2nO-rFOGHHmjKwW4GM3gfH0QNdY">
+<div class="absolute inset-0 flex items-center justify-center bg-black/40">
+<span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Product Details (Right) -->
+<div class="lg:col-span-5 flex flex-col justify-start">
+<div class="mb-4">
+<div class="flex justify-between items-start mb-4">
+<span class="inline-block px-3 py-1 bg-tertiary-container/20 text-tertiary border border-tertiary/30 rounded-full font-label-sm uppercase tracking-wider">Bán chạy</span>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-primary p-1 bg-surface-container rounded-full transition-colors"><span class="material-symbols-outlined text-sm">share</span></button>
+</div>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-4">Auto Reup Master</h1>
+<div class="flex items-center gap-4 mb-2">
+<div class="flex items-center text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="text-on-surface-variant font-label-md">4.9/5 (128 Đánh giá)</span>
+</div>
+<!-- Social Sharing -->
+<div class="flex items-center gap-3 mb-6">
+<span class="text-sm text-on-surface-variant">Chia sẻ:</span>
+<button class="text-[#1877F2] hover:opacity-80 transition-opacity"><span class="material-symbols-outlined text-xl">facebook</span></button>
+<button class="text-[#0068FF] hover:opacity-80 transition-opacity"><span class="material-symbols-outlined text-xl">forum</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-sm">content_copy</span> Copy link</button>
+</div>
+<div class="flex items-end gap-4 mb-8 pb-8 border-b border-white/10">
+<span class="font-headline-lg text-headline-lg text-primary">$49.00</span>
+<span class="font-body-lg text-body-lg text-on-surface-variant line-through mb-1">$89.00</span>
+</div>
+</div>
+<div class="flex flex-col gap-4 mb-8">
+<div class="flex gap-4">
+<button class="flex-1 primary-gradient text-on-primary font-label-md py-4 rounded-lg btn-glow transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+                            Mua ngay
+                        </button>
+<button class="flex-1 bg-surface-container-high border border-outline-variant hover:border-primary text-on-surface font-label-md py-4 rounded-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">download</span>
+                            Tải xuống
+                        </button>
+</div>
+<button class="w-full bg-[#0068FF]/10 text-[#0068FF] border border-[#0068FF]/30 hover:bg-[#0068FF]/20 font-label-md py-4 rounded-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">forum</span>
+                        Chat Zalo tư vấn
+                    </button>
+</div>
+<!-- Feature List -->
+<div class="grid grid-cols-2 gap-y-4 gap-x-8 glass-panel p-6 rounded-xl">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">bolt</span>
+<div>
+<p class="font-label-md text-on-surface">Tốc độ X10</p>
+<p class="text-sm text-on-surface-variant">Xử lý hàng loạt</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">translate</span>
+<div>
+<p class="font-label-md text-on-surface">Dịch tự động</p>
+<p class="text-sm text-on-surface-variant">Hỗ trợ 50+ ngôn ngữ</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">copyright</span>
+<div>
+<p class="font-label-md text-on-surface">Lách bản quyền</p>
+<p class="text-sm text-on-surface-variant">Thuật toán AI thông minh</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">cloud_sync</span>
+<div>
+<p class="font-label-md text-on-surface">Đăng tự động</p>
+<p class="text-sm text-on-surface-variant">Đa nền tảng</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Description -->
+<section class="mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Giới thiệu Auto Reup Master</h2>
+<div class="glass-panel p-8 rounded-xl">
+<p class="text-on-surface-variant mb-6 text-body-lg">
+                Auto Reup Master là giải pháp tối thượng dành cho các nhà sáng tạo nội dung, agency, YouTuber và TikToker. Bằng cách ứng dụng công nghệ AI tiên tiến, phần mềm giúp tự động hóa toàn bộ quy trình tải, dịch thuật, lách bản quyền và đăng tải video xuyên nền tảng. Tiết kiệm hàng ngàn giờ làm việc thủ công và mở rộng phạm vi tiếp cận nội dung của bạn ra toàn cầu một cách dễ dàng.
+            </p>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Vì sao nên chọn Auto Reup Master?</h3>
+<ul class="list-none space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="text-on-surface">Tự động hóa hoàn toàn quy trình reup video từ tải về đến đăng tải.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="text-on-surface">Tích hợp AI dịch thuật tự nhiên, giữ nguyên cảm xúc gốc hỗ trợ hơn 50 ngôn ngữ.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="text-on-surface">Công nghệ xử lý hình ảnh và âm thanh thông minh giúp vượt qua các bộ lọc bản quyền khắt khe.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="text-on-surface">Giao diện thân thiện, dễ sử dụng cho cả người mới bắt đầu.</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- Usage Guide -->
+<section class="mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8 text-center">Hướng dẫn sử dụng chỉ trong 4 bước</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="glass-panel p-6 rounded-xl flex flex-col items-center text-center relative">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl mb-4 absolute -top-6">1</div>
+<span class="material-symbols-outlined text-4xl text-primary mt-6 mb-4">download</span>
+<h3 class="font-label-md text-lg text-on-surface mb-2">Tải video gốc</h3>
+<p class="text-sm text-on-surface-variant">Dán link video từ bất kỳ nền tảng nào.</p>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col items-center text-center relative">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl mb-4 absolute -top-6">2</div>
+<span class="material-symbols-outlined text-4xl text-primary mt-6 mb-4">language</span>
+<h3 class="font-label-md text-lg text-on-surface mb-2">Chọn ngôn ngữ</h3>
+<p class="text-sm text-on-surface-variant">Lựa chọn ngôn ngữ đích mong muốn.</p>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col items-center text-center relative">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl mb-4 absolute -top-6">3</div>
+<span class="material-symbols-outlined text-4xl text-primary mt-6 mb-4">memory</span>
+<h3 class="font-label-md text-lg text-on-surface mb-2">AI tự động dịch</h3>
+<p class="text-sm text-on-surface-variant">Hệ thống xử lý phụ đề &amp; voice over.</p>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col items-center text-center relative">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl mb-4 absolute -top-6">4</div>
+<span class="material-symbols-outlined text-4xl text-primary mt-6 mb-4">publish</span>
+<h3 class="font-label-md text-lg text-on-surface mb-2">Xuất video</h3>
+<p class="text-sm text-on-surface-variant">Lưu hoặc đăng trực tiếp lên MXH.</p>
+</div>
+</div>
+</section>
+<!-- Related Products -->
+<section class="mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">Sản phẩm liên quan</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col hover:border-primary/50 transition-colors border border-white/5">
+<img alt="Neural TTS Basic" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARj5vYGlY_cw7CcTnCEptu4y40d2_uidfe2Z8kjZqc_p8jbTopLRS6r1m4JcwMRKkG0T1r_wfeeBn4uspj8k2_OP3uqrYxtWDaAxsueG_CXCAP2dB2rOqLnI0GrQlHF2Pk-I9iBpkTjxbsNS2lhnFZ5XG6txVg2ablkfYoJo-Q6wapOVHaOSdVv3SQ8Ycwip5YZ69exdHaOu21Ms0NJFUHvJ0pedmIFjRClYTe8c_n7MRdQi896uwSt95JCSWt0M-_2n0adV6NCvU">
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-label-md text-on-surface mb-2">Neural TTS Basic</h3>
+<div class="mt-auto flex justify-between items-end">
+<span class="text-primary font-bold">$29.00</span>
+<button class="text-on-surface hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">shopping_cart</span></button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col hover:border-primary/50 transition-colors border border-white/5">
+<img alt="Deep Transcribe" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy-Umhlen_4JfunDCB4WPQY8xCWzEBUeOU745rRCOsyTUwWcDeebRVYmF5r1o21J_wHytZ7ao_fLKXglZwjBmTCVsNNZ6uVMA3EHv-BBZrL809qx0Kg68-9n21wcoohOkJquDPKE64AYms3MB3rn1eyTdsnRd40TzTfP4sL5yK-oD-p-RpzKTDujet4CxseyP11MloTeZQaWkzaOkIAFfw6up2O24Nnwhzloi1fnp2p9HrSslwjl_jYQs4XijUAVq94svqRtpp2bc">
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-label-md text-on-surface mb-2">Deep Transcribe</h3>
+<div class="mt-auto flex justify-between items-end">
+<span class="text-primary font-bold">$39.00</span>
+<button class="text-on-surface hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">shopping_cart</span></button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col hover:border-primary/50 transition-colors border border-white/5">
+<img alt="Film Review AI" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFMS46GG0rOuW9oku1w5G-nlta-Jgb_HlDS8vMHOjTGPOUzpqZr1w7SWOsDDic7G0AQ_4nKF78J5PBJPTOygimeZryNFRpUYR5l2bQNcJ1euza1v51SBjIURH4lMioNHQ3pnEZQve3KgFkZbtPTxq9otzfwclRiNom5D2hZ3AueqVrt05qg7kwijRWU6j_3wsn-4eK5-zD-1Q7TPdtj7KLMxhtHGG6AXT5MlzkT0LJI6ECRNkxhcrJoyBfXXuHPGb3VToEnUqSM6Q">
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-label-md text-on-surface mb-2">Film Review AI</h3>
+<div class="mt-auto flex justify-between items-end">
+<span class="text-primary font-bold">$59.00</span>
+<button class="text-on-surface hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">shopping_cart</span></button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col hover:border-primary/50 transition-colors border border-white/5">
+<img alt="Key Claude/Codex" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAcGVKRMka4wxewXtR7GjhMKRXQf0vIhxHaS53TQKzuUdUtpYB9lvdpIcGVZCIfNyo1oaegg1KNwzakXULOE32px_okigP4wTJYYm6GctlP4TUUVsxkf9Pb_WyBBLejdd41c1Kn2cLy8MT_XB3M0H9STfYKaa5Iv_In56SGpjC1aL1cBDIDgFWxsYaDYmXhH5ZTekxkxunHFTH73_3waJnRJFas97Woe6NDQLms_DWzfJKgb7T2nO-rFOGHHmjKwW4GM3gfH0QNdY">
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-label-md text-on-surface mb-2">Key Claude/Codex</h3>
+<div class="mt-auto flex justify-between items-end">
+<span class="text-primary font-bold">$19.00</span>
+<button class="text-on-surface hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">shopping_cart</span></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews & Comments -->
+<section class="mb-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">Đánh giá từ khách hàng (128 đánh giá)</h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-6">
+<!-- Review 1 -->
+<div class="glass-panel p-6 rounded-xl">
+<div class="flex items-start gap-4 mb-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">A</div>
+<div>
+<h4 class="font-label-md text-on-surface">Anh Tuấn</h4>
+<div class="flex items-center text-tertiary text-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<span class="text-sm text-on-surface-variant ml-auto">12/05/2024</span>
+</div>
+<p class="text-on-surface-variant">Phần mềm rất tuyệt vời, tiết kiệm cho tôi rất nhiều thời gian dịch thuật. Khả năng lách bản quyền khá ổn.</p>
+</div>
+<!-- Review 2 -->
+<div class="glass-panel p-6 rounded-xl">
+<div class="flex items-start gap-4 mb-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">M</div>
+<div>
+<h4 class="font-label-md text-on-surface">Minh Châu</h4>
+<div class="flex items-center text-tertiary text-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+</div>
+<span class="text-sm text-on-surface-variant ml-auto">08/05/2024</span>
+</div>
+<p class="text-on-surface-variant">Giao diện dễ dùng, tốc độ xử lý nhanh. Hy vọng sẽ cập nhật thêm nhiều ngôn ngữ mới trong tương lai.</p>
+</div>
+<!-- Review 3 -->
+<div class="glass-panel p-6 rounded-xl">
+<div class="flex items-start gap-4 mb-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold">H</div>
+<div>
+<h4 class="font-label-md text-on-surface">Hoàng Nam</h4>
+<div class="flex items-center text-tertiary text-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</div>
+<span class="text-sm text-on-surface-variant ml-auto">02/05/2024</span>
+</div>
+<p class="text-on-surface-variant">Rất đáng tiền. Đội ngũ support nhiệt tình, giải đáp thắc mắc nhanh chóng qua Zalo.</p>
+</div>
+</div>
+<!-- Review Form -->
+<div class="lg:col-span-1">
+<div class="glass-panel p-6 rounded-xl sticky top-24">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Gửi đánh giá</h3>
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-1">Đánh giá của bạn</label>
+<div class="flex items-center text-outline cursor-pointer hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-1" for="review-name">Tên hiển thị</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-md px-3 py-2 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" id="review-name" placeholder="Nhập tên của bạn" type="text">
+</div>
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-1" for="review-content">Nội dung đánh giá</label>
+<textarea class="w-full bg-surface-container border border-outline-variant rounded-md px-3 py-2 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary h-24 resize-none" id="review-content" placeholder="Chia sẻ trải nghiệm của bạn về sản phẩm..."></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md py-2.5 rounded-md hover:bg-primary/90 transition-colors" type="button">
+                                Gửi đánh giá
+                            </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Actions -->
+<div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+<button class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant text-on-surface flex items-center justify-center hover:bg-surface-container-highest transition-colors shadow-lg" onclick="scrollToTop()" title="Back to top">
+<span class="material-symbols-outlined">arrow_upward</span>
+</button>
+<a class="w-12 h-12 rounded-full bg-[#0068FF] text-white flex items-center justify-center hover:bg-[#0052cc] transition-colors shadow-lg" href="#" title="Zalo">
+<span class="material-symbols-outlined">forum</span>
+</a>
+<a class="w-12 h-12 rounded-full bg-[#0084FF] text-white flex items-center justify-center hover:bg-[#006bce] transition-colors shadow-lg" href="#" title="Messenger">
+<span class="material-symbols-outlined">chat</span>
+</a>
+<a class="w-12 h-12 rounded-full bg-[#34A853] text-white flex items-center justify-center hover:bg-[#2b8c45] transition-colors shadow-lg" href="#" title="Call">
+<span class="material-symbols-outlined">call</span>
+</a>
+</div>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant pt-12 pb-6 px-gutter">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+<!-- Column 1: Brand/Legal -->
+<div class="flex flex-col gap-4">
+<span class="font-headline-lg text-headline-lg text-primary">AIVisionary</span>
+<p class="text-sm text-on-surface-variant mb-2">Empowering Neural Creativity.</p>
+<div class="flex flex-col gap-2">
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Refund Policy</a>
+</div>
+</div>
+<!-- Column 2: Payment -->
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-on-surface uppercase tracking-wider">Thanh toán</h4>
+<div class="flex flex-col gap-2">
+<span class="text-sm text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">account_balance</span> Bank Transfer</span>
+<span class="text-sm text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">account_balance_wallet</span> Momo</span>
+<span class="text-sm text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">credit_card</span> Visa / Mastercard</span>
+</div>
+</div>
+<!-- Column 3: Contact -->
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-on-surface uppercase tracking-wider">Liên hệ</h4>
+<div class="flex flex-col gap-3">
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="material-symbols-outlined text-sm">call</span> Hotline: 0123 456 789</a>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="material-symbols-outlined text-sm">forum</span> Zalo Support</a>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="material-symbols-outlined text-sm">facebook</span> Facebook Page</a>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="material-symbols-outlined text-sm">mail</span> contact@aivisionary.com</a>
+</div>
+</div>
+<!-- Column 4: Map -->
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-on-surface uppercase tracking-wider">Địa chỉ</h4>
+<div class="w-full h-32 bg-surface-container rounded-lg overflow-hidden border border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl">map</span>
+</div>
+<p class="text-sm text-on-surface-variant">123 AI Boulevard, Tech District, City</p>
+</div>
+</div>
+<div class="max-w-container-max mx-auto text-center border-t border-white/10 pt-6">
+<p class="text-sm text-on-surface-variant">© 2024 AIVisionary. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

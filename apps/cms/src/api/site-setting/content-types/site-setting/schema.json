@@ -1,0 +1,16 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_settings",
+  "info": { "singularName": "site-setting", "pluralName": "site-settings", "displayName": "Site Setting" },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "siteName": { "type": "string", "required": true },
+    "description": { "type": "text" },
+    "phone": { "type": "string" },
+    "email": { "type": "email" },
+    "zaloUrl": { "type": "string" },
+    "facebookUrl": { "type": "string" },
+    "address": { "type": "string" },
+    "promo": { "type": "json" }
+  }
+}
