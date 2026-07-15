@@ -89,7 +89,19 @@ async function fetchStrapiJson<T>({ tag, path }: FetchOptions): Promise<T | null
       });
       clearTimeout(timeout);
       if (response.status === 404) return null;
-      if (response.status >= 400 && response.status < 500) return null;
+      if (response.status >= 400 && response.status < 500) {
+        const body = await response.text().catch(() => "");
+        console.error(
+          JSON.stringify({
+            level: "warn",
+            event: "cms_fetch_rejected",
+            tag,
+            status: response.status,
+            body: body.slice(0, 300)
+          })
+        );
+        return null;
+      }
       if (!response.ok) throw new Error(`CMS ${response.status}`);
       return (await response.json()) as T;
     } catch (error) {
@@ -224,7 +236,8 @@ function mapReview(input: unknown): Review | undefined {
   const name = stringField(record, "name");
   const comment = stringField(record, "comment");
   if (!productSlug || !name || !comment) return undefined;
-  const status = record.status === "approved" || record.status === "rejected" || record.status === "pending" ? record.status : "pending";
+  const moderationStatus = record.moderationStatus ?? record.status;
+  const status = moderationStatus === "approved" || moderationStatus === "rejected" || moderationStatus === "pending" ? moderationStatus : "pending";
   return {
     id: String(record.documentId ?? record.id ?? `${productSlug}-${name}`),
     productSlug,
