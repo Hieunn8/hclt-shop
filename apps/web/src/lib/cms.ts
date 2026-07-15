@@ -38,7 +38,26 @@ function numberField(record: Record<string, unknown>, key: string, fallback = 0)
 
 function stringArrayField(record: Record<string, unknown>, key: string, fallback: string[]): string[] {
   const value = record[key];
-  return Array.isArray(value) && value.every((item) => typeof item === "string") ? value : fallback;
+  if (Array.isArray(value) && value.every((item) => typeof item === "string")) return value;
+  if (typeof value !== "string") return fallback;
+
+  const trimmed = value.trim();
+  if (!trimmed) return fallback;
+
+  if (trimmed.startsWith("[")) {
+    try {
+      const parsed = JSON.parse(trimmed) as unknown;
+      if (Array.isArray(parsed) && parsed.every((item) => typeof item === "string")) return parsed;
+    } catch {
+      // Fall through to newline parsing for hand-entered text.
+    }
+  }
+
+  const lines = trimmed
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+  return lines.length ? lines : fallback;
 }
 
 function relationSlug(record: Record<string, unknown>, key: string, fallback = ""): string {
