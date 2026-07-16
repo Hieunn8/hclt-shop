@@ -126,12 +126,26 @@ async function findUploadedFile(ctx: SeedContext, filename: string): Promise<Upl
   return file;
 }
 
+async function remoteFileExists(ctx: SeedContext, file: UploadFile): Promise<boolean> {
+  const fileUrl = file.url.startsWith("http") ? file.url : new URL(file.url, ctx.base).toString();
+  try {
+    const response = await fetch(fileUrl, { method: "HEAD" });
+    if (response.status === 405) {
+      const getResponse = await fetch(fileUrl, { method: "GET" });
+      return getResponse.ok;
+    }
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
 async function uploadAsset(ctx: SeedContext, asset?: MediaAsset): Promise<number | undefined> {
   const filename = assetFilename(asset);
   if (!filename) return undefined;
 
   const existing = await findUploadedFile(ctx, filename);
-  if (existing) return existing.id;
+  if (existing && (await remoteFileExists(ctx, existing))) return existing.id;
 
   const filePath = path.join(assetsDir, filename);
   if (!existsSync(filePath)) throw new Error(`Missing seed asset ${filePath}`);
