@@ -113,7 +113,7 @@ function mediaListField(record: Record<string, unknown>, key: string, fallback: 
 async function fetchStrapiJson<T>({ tag, path }: FetchOptions): Promise<T | null> {
   const token = process.env.STRAPI_API_TOKEN;
   const base = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_STRAPI_URL;
-  if (!token || !base) return null;
+  if (!base) return null;
 
   const url = new URL(path, base);
 
@@ -122,7 +122,7 @@ async function fetchStrapiJson<T>({ tag, path }: FetchOptions): Promise<T | null
     const timeout = setTimeout(() => controller.abort(), 8000);
     try {
       const response = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         signal: controller.signal,
         next: { tags: [tag], revalidate: 300 }
       });
