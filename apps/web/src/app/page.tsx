@@ -11,7 +11,7 @@ export default async function HomePage() {
   const catalog = await getCatalog();
   return (
     <>
-      <HeroCarousel slides={catalog.heroSlides} />
+      {catalog.heroSlides.length ? <HeroCarousel slides={catalog.heroSlides} /> : null}
       <section className="container section">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16 }}>
           {[
@@ -35,7 +35,7 @@ export default async function HomePage() {
           </div>
           <LinkButton href="/san-pham" variant="outline" className="hidden sm:inline-flex">Xem tất cả sản phẩm</LinkButton>
         </header>
-        <ProductExplorer categories={catalog.categories} products={catalog.products.slice(0, 4)} />
+        {catalog.products.length ? <ProductExplorer categories={catalog.categories} products={catalog.products.slice(0, 4)} /> : <p>Chưa có sản phẩm được xuất bản trong CMS.</p>}
       </section>
       <section className="container section">
         <h2 style={{ textAlign: "center", fontSize: "clamp(28px, 4vw, 32px)" }}>Khách hàng nói gì về chúng tôi</h2>

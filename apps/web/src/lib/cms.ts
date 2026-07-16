@@ -1,6 +1,6 @@
 import "server-only";
 import { fallbackData } from "./fallbackData";
-import type { BlogPost, CatalogData, Category, Policy, Product, Review, SiteSettings } from "./types";
+import type { BlogPost, CatalogData, Category, HeroSlide, MediaAsset, Policy, Product, Review, SiteSettings } from "./types";
 
 type FetchOptions = {
   tag: string;
@@ -36,6 +36,11 @@ function numberField(record: Record<string, unknown>, key: string, fallback = 0)
   return typeof value === "number" ? value : fallback;
 }
 
+function optionalNumberField(record: Record<string, unknown>, key: string): number | undefined {
+  const value = record[key];
+  return typeof value === "number" ? value : undefined;
+}
+
 function stringArrayField(record: Record<string, unknown>, key: string, fallback: string[]): string[] {
   const value = record[key];
   if (Array.isArray(value) && value.every((item) => typeof item === "string")) return value;
@@ -69,6 +74,40 @@ function relationSlug(record: Record<string, unknown>, key: string, fallback = "
     if (data) return stringField(data, "slug", fallback);
   }
   return fallback;
+}
+
+function relationRecord(record: Record<string, unknown>, key: string): Record<string, unknown> | undefined {
+  const relation = record[key];
+  if (isRecord(relation)) {
+    const data = unwrapRecord(relation.data);
+    return data ?? relation;
+  }
+  return undefined;
+}
+
+function mediaRecordToAsset(input: unknown): MediaAsset | undefined {
+  const record = unwrapRecord(input);
+  if (!record) return undefined;
+  const url = stringField(record, "url");
+  if (!url) return undefined;
+  const publicBase = process.env.NEXT_PUBLIC_STRAPI_URL;
+  const absoluteUrl = url.startsWith("http") ? url : publicBase ? new URL(url, publicBase).toString() : url;
+  const mime = stringField(record, "mime");
+  return {
+    url: absoluteUrl,
+    alt: stringField(record, "alternativeText", stringField(record, "name", "CMS media")),
+    type: mime.startsWith("video/") ? "video" : "image",
+    width: optionalNumberField(record, "width"),
+    height: optionalNumberField(record, "height")
+  };
+}
+
+function mediaListField(record: Record<string, unknown>, key: string, fallback: MediaAsset[]): MediaAsset[] {
+  const value = record[key];
+  const source = isRecord(value) && Array.isArray(value.data) ? value.data : value;
+  const list = Array.isArray(source) ? source : source ? [source] : [];
+  const mapped = list.map(mediaRecordToAsset).filter((item): item is MediaAsset => Boolean(item));
+  return mapped.length ? mapped : fallback;
 }
 
 async function fetchStrapiJson<T>({ tag, path }: FetchOptions): Promise<T | null> {
@@ -169,12 +208,31 @@ function mapProduct(input: unknown): Product | undefined {
     badge: parseBadge(record.badge, fallback?.badge),
     rating: numberField(record, "rating", fallback?.rating ?? 0),
     reviewCount: numberField(record, "reviewCount", fallback?.reviewCount ?? 0),
-    media: fallback?.media ?? fallbackData.products[0].media,
+    media: mediaListField(record, "media", fallback?.media ?? fallbackData.products[0].media),
     features: stringArrayField(record, "features", fallback?.features ?? []),
     usageSteps: stringArrayField(record, "usageSteps", fallback?.usageSteps ?? []),
     purchaseUrl: stringField(record, "purchaseUrl", fallback?.purchaseUrl),
     zaloUrl: stringField(record, "zaloUrl", fallback?.zaloUrl),
     publishedAt: stringField(record, "publishedAt", fallback?.publishedAt ?? new Date().toISOString())
+  };
+}
+
+function mapHeroSlide(input: unknown): HeroSlide | undefined {
+  const record = unwrapRecord(input);
+  if (!record) return undefined;
+  const title = stringField(record, "title");
+  const description = stringField(record, "description");
+  if (!title || !description) return undefined;
+  const product = relationRecord(record, "product");
+  const productSlug = product ? stringField(product, "slug") : stringField(record, "productSlug");
+  const image = mediaRecordToAsset(relationRecord(record, "image") ?? record.image);
+  if (!productSlug || !image) return undefined;
+  return {
+    id: String(record.documentId ?? record.id ?? title),
+    title,
+    description,
+    productSlug,
+    image
   };
 }
 
@@ -236,8 +294,8 @@ function mapReview(input: unknown): Review | undefined {
   const name = stringField(record, "name");
   const comment = stringField(record, "comment");
   if (!productSlug || !name || !comment) return undefined;
-  const moderationStatus = record.moderationStatus ?? record.status;
-  const status = moderationStatus === "approved" || moderationStatus === "rejected" || moderationStatus === "pending" ? moderationStatus : "pending";
+  const approved = typeof record.approved === "boolean" ? record.approved : record.moderationStatus === "approved" || record.status === "approved";
+  const status = approved ? "approved" : "pending";
   return {
     id: String(record.documentId ?? record.id ?? `${productSlug}-${name}`),
     productSlug,
@@ -250,15 +308,16 @@ function mapReview(input: unknown): Review | undefined {
 }
 
 function mapList<T>(response: StrapiListResponse | null, mapper: (input: unknown) => T | undefined, fallback: T[]): T[] {
-  const mapped = response?.data?.map(mapper).filter((item): item is T => Boolean(item)) ?? [];
-  return mapped.length ? mapped : fallback;
+  if (!response) return fallback;
+  return response.data?.map(mapper).filter((item): item is T => Boolean(item)) ?? [];
 }
 
 export async function getCatalog(): Promise<CatalogData> {
-  const [settingsResponse, categoriesResponse, productsResponse, postsResponse, policiesResponse, reviewsResponse] = await Promise.all([
+  const [settingsResponse, categoriesResponse, productsResponse, heroSlidesResponse, postsResponse, policiesResponse, reviewsResponse] = await Promise.all([
     fetchStrapiJson<StrapiSingleResponse>({ tag: "site-settings", path: "/api/site-setting" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "categories", path: "/api/categories?populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/products?populate=*" }),
+    fetchStrapiJson<StrapiListResponse>({ tag: "hero-slides", path: "/api/hero-slides?filters[active][$eq]=true&sort=sortOrder:asc&populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "blog-posts", path: "/api/blog-posts?populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "site-settings", path: "/api/policies?populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/reviews?populate=*" })
@@ -268,7 +327,7 @@ export async function getCatalog(): Promise<CatalogData> {
     settings: settingsResponse?.data ? mapSettings(settingsResponse.data) : fallbackData.settings,
     categories: mapList(categoriesResponse, mapCategory, fallbackData.categories),
     products: mapList(productsResponse, mapProduct, fallbackData.products),
-    heroSlides: fallbackData.heroSlides,
+    heroSlides: mapList(heroSlidesResponse, mapHeroSlide, fallbackData.heroSlides),
     testimonials: fallbackData.testimonials,
     faqs: fallbackData.faqs,
     blogPosts: mapList(postsResponse, mapBlogPost, fallbackData.blogPosts),

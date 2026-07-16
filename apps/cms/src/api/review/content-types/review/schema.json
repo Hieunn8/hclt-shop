@@ -9,7 +9,7 @@
     "emailHash": { "type": "string" },
     "rating": { "type": "integer", "min": 1, "max": 5, "required": true },
     "comment": { "type": "text", "required": true },
-    "moderationStatus": { "type": "enumeration", "enum": ["pending", "approved", "rejected"], "default": "pending", "required": true },
+    "approved": { "type": "boolean", "default": true, "required": true },
     "product": { "type": "relation", "relation": "manyToOne", "target": "api::product.product", "inversedBy": "reviews" }
   }
 }

@@ -149,7 +149,7 @@ function reviewPayload(review: Review, product?: StrapiRecord): Record<string, u
     emailHash,
     rating: review.rating,
     comment: review.comment,
-    moderationStatus: review.status,
+    approved: review.status === "approved",
     product: product ? recordKey(product) : undefined,
     createdAt: review.createdAt
   };

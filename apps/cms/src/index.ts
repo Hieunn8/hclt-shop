@@ -24,6 +24,8 @@ const PUBLIC_READ_ACTIONS = new Set([
   "api::category.category.findOne",
   "api::product.product.find",
   "api::product.product.findOne",
+  "api::hero-slide.hero-slide.find",
+  "api::hero-slide.hero-slide.findOne",
   "api::blog-post.blog-post.find",
   "api::blog-post.blog-post.findOne",
   "api::policy.policy.find",
@@ -39,6 +41,9 @@ const PUBLIC_MUTATION_PREFIXES = [
   "api::product.product.create",
   "api::product.product.update",
   "api::product.product.delete",
+  "api::hero-slide.hero-slide.create",
+  "api::hero-slide.hero-slide.update",
+  "api::hero-slide.hero-slide.delete",
   "api::blog-post.blog-post.create",
   "api::blog-post.blog-post.update",
   "api::blog-post.blog-post.delete"
