@@ -1,6 +1,6 @@
 import "server-only";
 import { fallbackData } from "./fallbackData";
-import type { BlogPost, CatalogData, Category, HeroSlide, MediaAsset, Policy, Product, Review, SiteSettings } from "./types";
+import type { BlogPost, CatalogData, Category, Faq, HeroSlide, MediaAsset, Policy, Product, Review, SiteMetric, SiteSettings, Testimonial } from "./types";
 
 type FetchOptions = {
   tag: string;
@@ -167,6 +167,11 @@ function mapSettings(input: unknown): SiteSettings {
     zaloUrl: stringField(record, "zaloUrl", fallbackData.settings.zaloUrl),
     facebookUrl: stringField(record, "facebookUrl", fallbackData.settings.facebookUrl),
     address: stringField(record, "address", fallbackData.settings.address),
+    pricingTitle: stringField(record, "pricingTitle", fallbackData.settings.pricingTitle),
+    pricingDescription: stringField(record, "pricingDescription", fallbackData.settings.pricingDescription),
+    contactTitle: stringField(record, "contactTitle", fallbackData.settings.contactTitle),
+    contactDescription: stringField(record, "contactDescription", fallbackData.settings.contactDescription),
+    contactSubmitLabel: stringField(record, "contactSubmitLabel", fallbackData.settings.contactSubmitLabel),
     promo: {
       active: typeof promo.active === "boolean" ? promo.active : fallbackData.settings.promo.active,
       text: typeof promo.text === "string" ? promo.text : fallbackData.settings.promo.text,
@@ -189,6 +194,19 @@ function mapCategory(input: unknown): Category | undefined {
   };
 }
 
+function mapSiteMetric(input: unknown): SiteMetric | undefined {
+  const record = unwrapRecord(input);
+  if (!record) return undefined;
+  const value = stringField(record, "value");
+  const label = stringField(record, "label");
+  if (!value || !label) return undefined;
+  return {
+    id: String(record.documentId ?? record.id ?? label),
+    value,
+    label
+  };
+}
+
 function mapProduct(input: unknown): Product | undefined {
   const record = unwrapRecord(input);
   if (!record) return undefined;
@@ -208,6 +226,7 @@ function mapProduct(input: unknown): Product | undefined {
     badge: parseBadge(record.badge, fallback?.badge),
     rating: numberField(record, "rating", fallback?.rating ?? 0),
     reviewCount: numberField(record, "reviewCount", fallback?.reviewCount ?? 0),
+    icon: mediaRecordToAsset(relationRecord(record, "icon") ?? record.icon),
     media: mediaListField(record, "media", fallback?.media ?? fallbackData.products[0].media),
     features: stringArrayField(record, "features", fallback?.features ?? []),
     usageSteps: stringArrayField(record, "usageSteps", fallback?.usageSteps ?? []),
@@ -268,7 +287,36 @@ function mapBlogPost(input: unknown): BlogPost | undefined {
     category: stringField(record, "category", fallback?.category ?? "Hướng dẫn"),
     author: stringField(record, "author", fallback?.author ?? "AIVisionary Team"),
     publishedAt: stringField(record, "publishedAt", fallback?.publishedAt ?? new Date().toISOString()),
-    image: fallback?.image ?? fallbackData.blogPosts[0].image
+    image: mediaRecordToAsset(relationRecord(record, "image") ?? record.image) ?? fallback?.image ?? fallbackData.blogPosts[0].image
+  };
+}
+
+function mapTestimonial(input: unknown): Testimonial | undefined {
+  const record = unwrapRecord(input);
+  if (!record) return undefined;
+  const name = stringField(record, "name");
+  const quote = stringField(record, "quote");
+  if (!name || !quote) return undefined;
+  return {
+    id: String(record.documentId ?? record.id ?? name),
+    name,
+    role: stringField(record, "role"),
+    quote,
+    rating: numberField(record, "rating", 5)
+  };
+}
+
+function mapFaq(input: unknown): Faq | undefined {
+  const record = unwrapRecord(input);
+  if (!record) return undefined;
+  const question = stringField(record, "question");
+  const answer = stringField(record, "answer");
+  if (!question || !answer) return undefined;
+  return {
+    id: String(record.documentId ?? record.id ?? question),
+    slug: stringField(record, "slug") || undefined,
+    question,
+    answer
   };
 }
 
@@ -313,11 +361,14 @@ function mapList<T>(response: StrapiListResponse | null, mapper: (input: unknown
 }
 
 export async function getCatalog(): Promise<CatalogData> {
-  const [settingsResponse, categoriesResponse, productsResponse, heroSlidesResponse, postsResponse, policiesResponse, reviewsResponse] = await Promise.all([
+  const [settingsResponse, categoriesResponse, productsResponse, heroSlidesResponse, siteMetricsResponse, testimonialsResponse, faqsResponse, postsResponse, policiesResponse, reviewsResponse] = await Promise.all([
     fetchStrapiJson<StrapiSingleResponse>({ tag: "site-settings", path: "/api/site-setting" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "categories", path: "/api/categories?populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/products?populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "hero-slides", path: "/api/hero-slides?filters[active][$eq]=true&sort=sortOrder:asc&populate=*" }),
+    fetchStrapiJson<StrapiListResponse>({ tag: "site-metrics", path: "/api/site-metrics?filters[active][$eq]=true&sort=sortOrder:asc" }),
+    fetchStrapiJson<StrapiListResponse>({ tag: "testimonials", path: "/api/testimonials?filters[active][$eq]=true&sort=sortOrder:asc&populate=*" }),
+    fetchStrapiJson<StrapiListResponse>({ tag: "faqs", path: "/api/faqs?filters[active][$eq]=true&sort=sortOrder:asc" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "blog-posts", path: "/api/blog-posts?populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "site-settings", path: "/api/policies?populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/reviews?populate=*" })
@@ -328,8 +379,9 @@ export async function getCatalog(): Promise<CatalogData> {
     categories: mapList(categoriesResponse, mapCategory, fallbackData.categories),
     products: mapList(productsResponse, mapProduct, fallbackData.products),
     heroSlides: mapList(heroSlidesResponse, mapHeroSlide, fallbackData.heroSlides),
-    testimonials: fallbackData.testimonials,
-    faqs: fallbackData.faqs,
+    testimonials: mapList(testimonialsResponse, mapTestimonial, fallbackData.testimonials),
+    faqs: mapList(faqsResponse, mapFaq, fallbackData.faqs),
+    siteMetrics: mapList(siteMetricsResponse, mapSiteMetric, fallbackData.siteMetrics),
     blogPosts: mapList(postsResponse, mapBlogPost, fallbackData.blogPosts),
     policies: mapList(policiesResponse, mapPolicy, fallbackData.policies),
     reviews: mapList(reviewsResponse, mapReview, fallbackData.reviews)

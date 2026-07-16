@@ -25,6 +25,9 @@ artifacts-*.png
 aivisionary-release.zip
 backups/
 deploy/env/*.env
+apps/cms/.strapi/
+apps/cms/.strapi-updater.json
+apps/cms/public/uploads/
 
 # Rust build output for harness tooling.
 target/

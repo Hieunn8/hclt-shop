@@ -161,7 +161,22 @@ Không đưa token này vào Git.
 
 ## 7. Seed dữ liệu thật vào CMS
 
-Chạy seed từ host VPS, dùng public CMS URL:
+Nếu CMS chạy trực tiếp trên host VPS, có thể chạy direct seed sau khi đã build CMS. Cách này dùng `deploy/env/cms.env`, ghi vào đúng DB production, tự upsert theo slug, upload hoặc phục hồi media vào `apps/cms/public/uploads`, và không cần `STRAPI_API_TOKEN`. Dừng process CMS trước khi chạy để tránh tranh chấp connection DB:
+
+```bash
+pnpm --filter @aivisionary/cms build
+pnpm seed:direct
+```
+
+Kết quả đúng:
+
+```json
+{"ok":true,"mode":"strapi-direct-upsert"}
+```
+
+Direct seed bao gồm: Site Setting, Category, Product + icon/media, Hero Slide + banner image + product relation, Site Metric, Testimonial, FAQ, Blog Post + image, Policy, Review.
+
+Nếu CMS chạy bằng Docker Compose, dùng REST seed thay vì direct seed để file media được upload vào đúng container/volume `cms_uploads`. Tạo API token ở bước 6 rồi chạy từ host VPS bằng public CMS URL:
 
 ```bash
 set -a

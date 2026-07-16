@@ -25,6 +25,7 @@ export type Product = {
   badge?: "hot" | "bestseller" | "new" | "featured";
   rating: number;
   reviewCount: number;
+  icon?: MediaAsset;
   media: MediaAsset[];
   features: string[];
   usageSteps: string[];
@@ -51,8 +52,15 @@ export type Testimonial = {
 
 export type Faq = {
   id: string;
+  slug?: string;
   question: string;
   answer: string;
+};
+
+export type SiteMetric = {
+  id: string;
+  value: string;
+  label: string;
 };
 
 export type BlogPost = {
@@ -92,6 +100,11 @@ export type SiteSettings = {
   zaloUrl: string;
   facebookUrl: string;
   address: string;
+  pricingTitle: string;
+  pricingDescription: string;
+  contactTitle: string;
+  contactDescription: string;
+  contactSubmitLabel: string;
   promo: {
     active: boolean;
     text: string;
@@ -106,6 +119,7 @@ export type CatalogData = {
   heroSlides: HeroSlide[];
   testimonials: Testimonial[];
   faqs: Faq[];
+  siteMetrics: SiteMetric[];
   blogPosts: BlogPost[];
   policies: Policy[];
   reviews: Review[];

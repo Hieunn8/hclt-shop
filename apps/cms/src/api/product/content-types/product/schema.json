@@ -13,6 +13,7 @@
     "badge": { "type": "enumeration", "enum": ["hot", "bestseller", "new", "featured"] },
     "rating": { "type": "decimal", "default": 0 },
     "reviewCount": { "type": "integer", "default": 0 },
+    "icon": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
     "media": { "type": "media", "multiple": true, "allowedTypes": ["images", "videos"] },
     "features": { "type": "text" },
     "usageSteps": { "type": "text" },

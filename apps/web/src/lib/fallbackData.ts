@@ -16,6 +16,11 @@ export const fallbackData: CatalogData = {
     zaloUrl: "https://zalo.me/0123456789",
     facebookUrl: "https://facebook.com/aivisionary",
     address: "Ho Chi Minh City, Vietnam",
+    pricingTitle: "Bảng giá",
+    pricingDescription: "Danh mục sản phẩm được lấy từ CMS, có fallback seed để tránh trang trắng khi chạy lần đầu.",
+    contactTitle: "Liên hệ",
+    contactDescription: "Gửi nhu cầu của bạn. Nếu thiếu API email, hệ thống vẫn ghi nhận fallback ở server log mà không chặn dự án.",
+    contactSubmitLabel: "Gửi liên hệ",
     promo: {
       active: true,
       text: "Ưu đãi tháng 7: Giảm 20% tất cả Key AI - áp dụng đến hết 31/07",
@@ -116,6 +121,12 @@ export const fallbackData: CatalogData = {
     { id: "f3", question: "Có thanh toán tự động trên website không?", answer: "Giai đoạn 1 chưa có thanh toán tự động. CTA sẽ dẫn đến liên hệ hoặc URL mua hàng do CMS cấu hình." },
     { id: "f4", question: "Dữ liệu form có gửi thẳng vào CMS không?", answer: "Không. Form đi qua Next.js route handler để validate, rate-limit và chống spam trước." },
     { id: "f5", question: "Có thể deploy trên VPS không?", answer: "Có. Repository có Docker Compose, Nginx config và script vận hành." }
+  ],
+  siteMetrics: [
+    { id: "m1", value: "8+", label: "Sản phẩm seed" },
+    { id: "m2", value: "4.8/5", label: "Điểm hài lòng" },
+    { id: "m3", value: "24h", label: "Phản hồi hỗ trợ" },
+    { id: "m4", value: "100%", label: "CMS-driven" }
   ],
   blogPosts: [
     { id: "b1", slug: "toi-uu-workflow-content-ai", title: "Tối ưu workflow content AI cho creator", excerpt: "Cách chia bước để vừa nhanh vừa giữ chất lượng biên tập.", content: "Một workflow tốt nên tách rõ bước thu thập nguồn, tạo bản nháp, duyệt thủ công và xuất bản. AI nên hỗ trợ tốc độ, không thay thế trách nhiệm kiểm duyệt.", category: "Hướng dẫn", author: "AIVisionary Team", publishedAt: "2026-07-01T00:00:00.000Z", image: asset("blog-workflow.svg", "Workflow content AI") },

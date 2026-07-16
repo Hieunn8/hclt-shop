@@ -11,6 +11,11 @@
     "zaloUrl": { "type": "string" },
     "facebookUrl": { "type": "string" },
     "address": { "type": "string" },
-    "promo": { "type": "json" }
+    "promo": { "type": "json" },
+    "pricingTitle": { "type": "string" },
+    "pricingDescription": { "type": "text" },
+    "contactTitle": { "type": "string" },
+    "contactDescription": { "type": "text" },
+    "contactSubmitLabel": { "type": "string" }
   }
 }

@@ -11,6 +11,7 @@
     "build": "pnpm --filter @aivisionary/web build",
     "test:e2e": "pnpm --filter @aivisionary/web test:e2e",
     "seed": "tsx scripts/seed-cms.ts",
+    "seed:direct": "tsx scripts/seed-cms-direct.ts",
     "verify-env": "bash scripts/verify-env.sh"
   },
   "devDependencies": {

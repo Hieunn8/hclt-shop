@@ -1,0 +1,13 @@
+{
+  "kind": "collectionType",
+  "collectionName": "site_metrics",
+  "info": { "singularName": "site-metric", "pluralName": "site-metrics", "displayName": "Site Metric" },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "value": { "type": "string", "required": true },
+    "label": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "label", "required": true },
+    "sortOrder": { "type": "integer", "default": 0 },
+    "active": { "type": "boolean", "default": true }
+  }
+}
