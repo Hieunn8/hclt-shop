@@ -124,3 +124,10 @@ export type CatalogData = {
   policies: Policy[];
   reviews: Review[];
 };
+
+export type ProductDetailData = {
+  product: Product;
+  reviews: Review[];
+  related: Product[];
+  settings: SiteSettings;
+};

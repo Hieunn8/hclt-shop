@@ -26,13 +26,15 @@ export const revalidateSchema = z.object({
 
 export function tagsForRevalidate(model: string, slug?: string): string[] {
   const normalized = model.toLowerCase();
-  if (normalized.includes("product")) return slug ? ["products", `product:${slug}`] : ["products"];
-  if (normalized.includes("blog")) return slug ? ["blog-posts", `blog:${slug}`] : ["blog-posts"];
-  if (normalized.includes("category")) return ["categories", "products"];
-  if (normalized.includes("policy")) return ["site-settings"];
-  if (normalized.includes("faq")) return ["faqs"];
-  if (normalized.includes("testimonial")) return ["testimonials"];
-  if (normalized.includes("hero")) return ["hero-slides"];
-  if (normalized.includes("site")) return ["site-settings"];
-  return ["site-settings"];
+  if (normalized.includes("product")) return slug ? ["catalog", "products", `product:${slug}`] : ["catalog", "products"];
+  if (normalized.includes("review")) return ["catalog", "reviews", "products"];
+  if (normalized.includes("blog")) return slug ? ["catalog", "blog-posts", `blog:${slug}`] : ["catalog", "blog-posts"];
+  if (normalized.includes("category")) return ["catalog", "categories", "products"];
+  if (normalized.includes("policy")) return ["catalog", "site-settings"];
+  if (normalized.includes("faq")) return ["catalog", "faqs"];
+  if (normalized.includes("testimonial")) return ["catalog", "testimonials"];
+  if (normalized.includes("hero")) return ["catalog", "hero-slides"];
+  if (normalized.includes("metric")) return ["catalog", "site-metrics"];
+  if (normalized.includes("site")) return ["catalog", "site-settings"];
+  return ["catalog", "site-settings"];
 }

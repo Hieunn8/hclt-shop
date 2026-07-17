@@ -8,7 +8,7 @@ import { LinkButton } from "@/components/ui/Button";
 import { PriceDisplay } from "@/components/ui/PriceDisplay";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { RatingStars } from "@/components/ui/RatingStars";
-import { getCatalog, getProduct } from "@/lib/cms";
+import { getCatalog, getProduct, getProductDetail } from "@/lib/cms";
 import { absoluteUrl } from "@/lib/format";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -30,11 +30,9 @@ export async function generateStaticParams() {
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const catalog = await getCatalog();
-  const product = catalog.products.find((item) => item.slug === slug);
-  if (!product) notFound();
-  const reviews = catalog.reviews.filter((review) => review.productSlug === product.slug && review.status === "approved");
-  const related = catalog.products.filter((item) => item.categorySlug === product.categorySlug && item.slug !== product.slug).slice(0, 3);
+  const detail = await getProductDetail(slug);
+  if (!detail) notFound();
+  const { product, reviews, related, settings } = detail;
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -60,7 +58,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <PriceDisplay price={product.price} compareAtPrice={product.compareAtPrice} />
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               <LinkButton href={product.purchaseUrl ?? "/lien-he"}><ShoppingBag size={18} /> Mua ngay</LinkButton>
-              <LinkButton href={product.zaloUrl ?? catalog.settings.zaloUrl} variant="zalo"><MessageCircle size={18} /> Zalo</LinkButton>
+              <LinkButton href={product.zaloUrl ?? settings.zaloUrl} variant="zalo"><MessageCircle size={18} /> Zalo</LinkButton>
               <button style={{ minHeight: 44, borderRadius: 12, border: "1px solid var(--outline-variant)", background: "var(--surface-container)", color: "var(--on-surface)", paddingInline: 14 }}><Copy size={16} /> Copy link</button>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 10 }}>
@@ -89,7 +87,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
       </section>
-      <div className="mobile-sticky-cta"><LinkButton href={product.purchaseUrl ?? "/lien-he"}>Mua ngay</LinkButton><LinkButton href={product.zaloUrl ?? catalog.settings.zaloUrl} variant="zalo">Zalo</LinkButton></div>
+      <div className="mobile-sticky-cta"><LinkButton href={product.purchaseUrl ?? "/lien-he"}>Mua ngay</LinkButton><LinkButton href={product.zaloUrl ?? settings.zaloUrl} variant="zalo">Zalo</LinkButton></div>
     </>
   );
 }

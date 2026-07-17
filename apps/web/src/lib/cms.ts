@@ -1,6 +1,7 @@
 import "server-only";
+import { unstable_cache } from "next/cache";
 import { fallbackData } from "./fallbackData";
-import type { BlogPost, CatalogData, Category, Faq, HeroSlide, MediaAsset, Policy, Product, Review, SiteMetric, SiteSettings, Testimonial } from "./types";
+import type { BlogPost, CatalogData, Category, Faq, HeroSlide, MediaAsset, Policy, Product, ProductDetailData, Review, SiteMetric, SiteSettings, Testimonial } from "./types";
 
 type FetchOptions = {
   tag: string;
@@ -13,6 +14,30 @@ type StrapiListResponse = {
 
 type StrapiSingleResponse = {
   data?: unknown;
+};
+
+type CatalogEndpointResponse = {
+  data?: {
+    settings?: unknown;
+    categories?: unknown[];
+    products?: unknown[];
+    heroSlides?: unknown[];
+    siteMetrics?: unknown[];
+    testimonials?: unknown[];
+    faqs?: unknown[];
+    blogPosts?: unknown[];
+    policies?: unknown[];
+    reviews?: unknown[];
+  };
+};
+
+type ProductDetailEndpointResponse = {
+  data?: {
+    product?: unknown;
+    reviews?: unknown[];
+    related?: unknown[];
+    settings?: unknown;
+  };
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -137,7 +162,6 @@ async function fetchStrapiJson<T>({ tag, path }: FetchOptions): Promise<T | null
 
   const url = new URL(path, base);
   const isLocalBase = url.hostname === "localhost" || url.hostname === "127.0.0.1" || url.hostname === "::1";
-  const shouldBypassCache = process.env.NODE_ENV !== "production" || isLocalBase;
   const timeoutMs = isLocalBase ? 30000 : 8000;
 
   for (let attempt = 0; attempt < 3; attempt += 1) {
@@ -147,7 +171,7 @@ async function fetchStrapiJson<T>({ tag, path }: FetchOptions): Promise<T | null
       const response = await fetch(url, {
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         signal: controller.signal,
-        ...(shouldBypassCache ? { cache: "no-store" as const } : { next: { tags: [tag], revalidate: 300 } })
+        next: { tags: [tag], revalidate: 60 }
       });
       clearTimeout(timeout);
       if (response.status === 404) return null;
@@ -383,37 +407,78 @@ function mapList<T>(response: StrapiListResponse | null, mapper: (input: unknown
   return response.data?.map(mapper).filter((item): item is T => Boolean(item)) ?? [];
 }
 
-export async function getCatalog(): Promise<CatalogData> {
-  const [settingsResponse, categoriesResponse, productsResponse, heroSlidesResponse, siteMetricsResponse, testimonialsResponse, faqsResponse, postsResponse, policiesResponse, reviewsResponse] = await Promise.all([
-    fetchStrapiJson<StrapiSingleResponse>({ tag: "site-settings", path: "/api/site-setting" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "categories", path: "/api/categories?populate=*" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/products?sort=publishedAt:desc&populate=*" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "hero-slides", path: "/api/hero-slides?filters[active][$eq]=true&sort=sortOrder:asc&populate=*" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "site-metrics", path: "/api/site-metrics?filters[active][$eq]=true&sort=sortOrder:asc" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "testimonials", path: "/api/testimonials?filters[active][$eq]=true&sort=sortOrder:asc&populate=*" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "faqs", path: "/api/faqs?filters[active][$eq]=true&sort=sortOrder:asc" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "blog-posts", path: "/api/blog-posts?populate=*" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "site-settings", path: "/api/policies?populate=*" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/reviews-with-products" })
-  ]);
+function cacheForNext<TArgs extends unknown[], TResult>(
+  fn: (...args: TArgs) => Promise<TResult>,
+  keyParts: string[],
+  options: { tags: string[]; revalidate: number }
+): (...args: TArgs) => Promise<TResult> {
+  if (process.env.VITEST) return fn;
+  return unstable_cache(fn, keyParts, options);
+}
+
+function mapUnknownList<T>(items: unknown[] | undefined, mapper: (input: unknown) => T | undefined, fallback: T[]): T[] {
+  if (!items) return fallback;
+  const mapped = items.map(mapper).filter((item): item is T => Boolean(item));
+  return mapped.length ? mapped : [];
+}
+
+async function getCatalogUncached(): Promise<CatalogData> {
+  const response = await fetchStrapiJson<CatalogEndpointResponse>({ tag: "catalog", path: "/api/catalog" });
+  const data = response?.data;
+  if (!data) return fallbackData;
 
   return {
-    settings: settingsResponse?.data ? mapSettings(settingsResponse.data) : fallbackData.settings,
-    categories: mapList(categoriesResponse, mapCategory, fallbackData.categories),
-    products: mapList(productsResponse, mapProduct, fallbackData.products),
-    heroSlides: mapList(heroSlidesResponse, mapHeroSlide, fallbackData.heroSlides),
-    testimonials: mapList(testimonialsResponse, mapTestimonial, fallbackData.testimonials),
-    faqs: mapList(faqsResponse, mapFaq, fallbackData.faqs),
-    siteMetrics: mapList(siteMetricsResponse, mapSiteMetric, fallbackData.siteMetrics),
-    blogPosts: mapList(postsResponse, mapBlogPost, fallbackData.blogPosts),
-    policies: mapList(policiesResponse, mapPolicy, fallbackData.policies),
-    reviews: mapList(reviewsResponse, mapReview, fallbackData.reviews)
+    settings: data.settings ? mapSettings(data.settings) : fallbackData.settings,
+    categories: mapUnknownList(data.categories, mapCategory, fallbackData.categories),
+    products: mapUnknownList(data.products, mapProduct, fallbackData.products),
+    heroSlides: mapUnknownList(data.heroSlides, mapHeroSlide, fallbackData.heroSlides),
+    testimonials: mapUnknownList(data.testimonials, mapTestimonial, fallbackData.testimonials),
+    faqs: mapUnknownList(data.faqs, mapFaq, fallbackData.faqs),
+    siteMetrics: mapUnknownList(data.siteMetrics, mapSiteMetric, fallbackData.siteMetrics),
+    blogPosts: mapUnknownList(data.blogPosts, mapBlogPost, fallbackData.blogPosts),
+    policies: mapUnknownList(data.policies, mapPolicy, fallbackData.policies),
+    reviews: mapUnknownList(data.reviews, mapReview, fallbackData.reviews)
   };
 }
 
+export const getCatalog = cacheForNext(getCatalogUncached, ["catalog"], {
+  tags: ["catalog", "products", "hero-slides", "site-settings", "reviews"],
+  revalidate: 60
+});
+
+async function getProductDetailUncached(slug: string): Promise<ProductDetailData | undefined> {
+  const response = await fetchStrapiJson<ProductDetailEndpointResponse>({ tag: "products", path: `/api/products-by-slug/${encodeURIComponent(slug)}` });
+  const data = response?.data;
+  const product = data?.product ? mapProduct(data.product) : undefined;
+  if (!data || !product) {
+    const fallbackProduct = fallbackData.products.find((item) => item.slug === slug);
+    if (!fallbackProduct) return undefined;
+    return {
+      product: fallbackProduct,
+      reviews: fallbackData.reviews.filter((review) => review.productSlug === fallbackProduct.slug && review.status === "approved"),
+      related: fallbackData.products.filter((item) => item.categorySlug === fallbackProduct.categorySlug && item.slug !== fallbackProduct.slug).slice(0, 3),
+      settings: fallbackData.settings
+    };
+  }
+
+  return {
+    product,
+    reviews: mapUnknownList(data.reviews, mapReview, []).filter((review) => review.status === "approved"),
+    related: mapUnknownList(data.related, mapProduct, []),
+    settings: data.settings ? mapSettings(data.settings) : fallbackData.settings
+  };
+}
+
+export function getProductDetail(slug: string): Promise<ProductDetailData | undefined> {
+  return cacheForNext(() => getProductDetailUncached(slug), ["product-detail", slug], {
+    tags: ["products", `product:${slug}`, "reviews"],
+    revalidate: 60
+  })();
+}
+
 export async function getProduct(slug: string): Promise<Product | undefined> {
-  const catalog = await getCatalog();
-  return catalog.products.find((product) => product.slug === slug);
+  const detail = await getProductDetail(slug);
+  return detail?.product;
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
