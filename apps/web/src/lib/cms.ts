@@ -1,6 +1,7 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
 import { fallbackData } from "./fallbackData";
+import { redisGetJson, redisSetJson } from "./redisCache";
 import type { BlogPost, CatalogData, Category, Faq, HeroSlide, MediaAsset, Policy, Product, ProductDetailData, Review, SiteMetric, SiteSettings, Testimonial } from "./types";
 
 type FetchOptions = {
@@ -423,11 +424,14 @@ function mapUnknownList<T>(items: unknown[] | undefined, mapper: (input: unknown
 }
 
 async function getCatalogUncached(): Promise<CatalogData> {
+  const cached = await redisGetJson<CatalogData>("catalog:v1");
+  if (cached) return cached;
+
   const response = await fetchStrapiJson<CatalogEndpointResponse>({ tag: "catalog", path: "/api/catalog" });
   const data = response?.data;
   if (!data) return fallbackData;
 
-  return {
+  const catalog = {
     settings: data.settings ? mapSettings(data.settings) : fallbackData.settings,
     categories: mapUnknownList(data.categories, mapCategory, fallbackData.categories),
     products: mapUnknownList(data.products, mapProduct, fallbackData.products),
@@ -439,6 +443,9 @@ async function getCatalogUncached(): Promise<CatalogData> {
     policies: mapUnknownList(data.policies, mapPolicy, fallbackData.policies),
     reviews: mapUnknownList(data.reviews, mapReview, fallbackData.reviews)
   };
+
+  await redisSetJson("catalog:v1", catalog);
+  return catalog;
 }
 
 export const getCatalog = cacheForNext(getCatalogUncached, ["catalog"], {
@@ -447,26 +454,35 @@ export const getCatalog = cacheForNext(getCatalogUncached, ["catalog"], {
 });
 
 async function getProductDetailUncached(slug: string): Promise<ProductDetailData | undefined> {
+  const cacheKey = `product-detail:v1:${slug}`;
+  const cached = await redisGetJson<ProductDetailData>(cacheKey);
+  if (cached) return cached;
+
   const response = await fetchStrapiJson<ProductDetailEndpointResponse>({ tag: "products", path: `/api/products-by-slug/${encodeURIComponent(slug)}` });
   const data = response?.data;
   const product = data?.product ? mapProduct(data.product) : undefined;
   if (!data || !product) {
     const fallbackProduct = fallbackData.products.find((item) => item.slug === slug);
     if (!fallbackProduct) return undefined;
-    return {
+    const detail = {
       product: fallbackProduct,
       reviews: fallbackData.reviews.filter((review) => review.productSlug === fallbackProduct.slug && review.status === "approved"),
       related: fallbackData.products.filter((item) => item.categorySlug === fallbackProduct.categorySlug && item.slug !== fallbackProduct.slug).slice(0, 3),
       settings: fallbackData.settings
     };
+    await redisSetJson(cacheKey, detail, 60);
+    return detail;
   }
 
-  return {
+  const detail = {
     product,
     reviews: mapUnknownList(data.reviews, mapReview, []).filter((review) => review.status === "approved"),
     related: mapUnknownList(data.related, mapProduct, []),
     settings: data.settings ? mapSettings(data.settings) : fallbackData.settings
   };
+
+  await redisSetJson(cacheKey, detail);
+  return detail;
 }
 
 export function getProductDetail(slug: string): Promise<ProductDetailData | undefined> {

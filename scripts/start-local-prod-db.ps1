@@ -136,6 +136,12 @@ $frontendEnv["NEXT_PUBLIC_SITE_URL"] = "http://localhost:3000"
 $frontendEnv["NEXT_PUBLIC_STRAPI_URL"] = "http://localhost:1337"
 $frontendEnv["STRAPI_INTERNAL_URL"] = "http://localhost:1337"
 $frontendEnv["REVALIDATE_SECRET"] = ""
+if (!$frontendEnv.ContainsKey("REDIS_URL") -or !$frontendEnv["REDIS_URL"]) {
+  $frontendEnv["REDIS_URL"] = "redis://13.140.130.137:6379"
+}
+if (!$frontendEnv.ContainsKey("REDIS_CACHE_DISABLED") -or !$frontendEnv["REDIS_CACHE_DISABLED"]) {
+  $frontendEnv["REDIS_CACHE_DISABLED"] = "false"
+}
 
 $started = @()
 

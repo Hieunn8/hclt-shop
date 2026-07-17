@@ -2,6 +2,7 @@ import { timingSafeEqual } from "crypto";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { getIp, rateLimit } from "@/lib/rateLimit";
+import { redisDeleteKeys, redisDeletePatterns, redisKeysForTags, redisPatternsForTags } from "@/lib/redisCache";
 import { revalidateSchema, tagsForRevalidate } from "@/lib/validation";
 
 function secretMatches(candidate: string | null): boolean {
@@ -24,6 +25,9 @@ export async function POST(request: Request) {
   if (!parsed.success) return NextResponse.json({ message: "Invalid payload." }, { status: 400 });
   const tags = tagsForRevalidate(parsed.data.model, parsed.data.slug);
   tags.forEach((tag) => revalidateTag(tag));
-  console.info(JSON.stringify({ level: "info", event: "revalidate", model: parsed.data.model, action: parsed.data.action, tags }));
-  return NextResponse.json({ revalidated: true, tags });
+  const redisKeys = redisKeysForTags(tags);
+  await redisDeleteKeys(redisKeys);
+  const redisPatternKeys = await redisDeletePatterns(redisPatternsForTags(tags));
+  console.info(JSON.stringify({ level: "info", event: "revalidate", model: parsed.data.model, action: parsed.data.action, tags, redisKeys, redisPatternKeys }));
+  return NextResponse.json({ revalidated: true, tags, redisKeys, redisPatternKeys });
 }
