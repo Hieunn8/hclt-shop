@@ -110,21 +110,44 @@ function mediaListField(record: Record<string, unknown>, key: string, fallback: 
   return mapped.length ? mapped : fallback;
 }
 
+function optionalEnv(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+  const trimmed = value.trim();
+  if (!trimmed || /^<[^>]+>$/.test(trimmed)) return undefined;
+  return trimmed;
+}
+
+function slugFromText(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function productSlugFromReviewSlug(value: string): string {
+  return value.replace(/-r\d+$/i, "");
+}
+
 async function fetchStrapiJson<T>({ tag, path }: FetchOptions): Promise<T | null> {
-  const token = process.env.STRAPI_API_TOKEN;
-  const base = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_STRAPI_URL;
+  const token = optionalEnv(process.env.STRAPI_API_TOKEN);
+  const base = optionalEnv(process.env.STRAPI_INTERNAL_URL) || optionalEnv(process.env.NEXT_PUBLIC_STRAPI_URL);
   if (!base) return null;
 
   const url = new URL(path, base);
+  const isLocalBase = url.hostname === "localhost" || url.hostname === "127.0.0.1" || url.hostname === "::1";
+  const shouldBypassCache = process.env.NODE_ENV !== "production" || isLocalBase;
+  const timeoutMs = isLocalBase ? 30000 : 8000;
 
   for (let attempt = 0; attempt < 3; attempt += 1) {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
       const response = await fetch(url, {
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         signal: controller.signal,
-        next: { tags: [tag], revalidate: 300 }
+        ...(shouldBypassCache ? { cache: "no-store" as const } : { next: { tags: [tag], revalidate: 300 } })
       });
       clearTimeout(timeout);
       if (response.status === 404) return null;
@@ -243,7 +266,7 @@ function mapHeroSlide(input: unknown): HeroSlide | undefined {
   const description = stringField(record, "description");
   if (!title || !description) return undefined;
   const product = relationRecord(record, "product");
-  const productSlug = product ? stringField(product, "slug") : stringField(record, "productSlug");
+  const productSlug = product ? stringField(product, "slug") : stringField(record, "productSlug", slugFromText(title));
   const image = mediaRecordToAsset(relationRecord(record, "image") ?? record.image);
   if (!productSlug || !image) return undefined;
   return {
@@ -338,7 +361,7 @@ function mapPolicy(input: unknown): Policy | undefined {
 function mapReview(input: unknown): Review | undefined {
   const record = unwrapRecord(input);
   if (!record) return undefined;
-  const productSlug = relationSlug(record, "product", stringField(record, "productSlug"));
+  const productSlug = relationSlug(record, "product", stringField(record, "productSlug", productSlugFromReviewSlug(stringField(record, "slug"))));
   const name = stringField(record, "name");
   const comment = stringField(record, "comment");
   if (!productSlug || !name || !comment) return undefined;
@@ -364,14 +387,14 @@ export async function getCatalog(): Promise<CatalogData> {
   const [settingsResponse, categoriesResponse, productsResponse, heroSlidesResponse, siteMetricsResponse, testimonialsResponse, faqsResponse, postsResponse, policiesResponse, reviewsResponse] = await Promise.all([
     fetchStrapiJson<StrapiSingleResponse>({ tag: "site-settings", path: "/api/site-setting" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "categories", path: "/api/categories?populate=*" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/products?populate=*" }),
+    fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/products?sort=publishedAt:desc&populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "hero-slides", path: "/api/hero-slides?filters[active][$eq]=true&sort=sortOrder:asc&populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "site-metrics", path: "/api/site-metrics?filters[active][$eq]=true&sort=sortOrder:asc" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "testimonials", path: "/api/testimonials?filters[active][$eq]=true&sort=sortOrder:asc&populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "faqs", path: "/api/faqs?filters[active][$eq]=true&sort=sortOrder:asc" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "blog-posts", path: "/api/blog-posts?populate=*" }),
     fetchStrapiJson<StrapiListResponse>({ tag: "site-settings", path: "/api/policies?populate=*" }),
-    fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/reviews?populate=*" })
+    fetchStrapiJson<StrapiListResponse>({ tag: "products", path: "/api/reviews-with-products" })
   ]);
 
   return {

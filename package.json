@@ -12,6 +12,7 @@
     "test:e2e": "pnpm --filter @aivisionary/web test:e2e",
     "seed": "tsx scripts/seed-cms.ts",
     "seed:direct": "tsx scripts/seed-cms-direct.ts",
+    "start:local-prod-db": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local-prod-db.ps1",
     "verify-env": "bash scripts/verify-env.sh"
   },
   "devDependencies": {
