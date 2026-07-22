@@ -156,6 +156,49 @@ function productSlugFromReviewSlug(value: string): string {
   return value.replace(/-r\d+$/i, "");
 }
 
+type ProductReviewAggregate = {
+  rating: number;
+  reviewCount: number;
+};
+
+function roundRating(value: number): number {
+  return Math.round(value * 10) / 10;
+}
+
+export function reviewAggregatesByProduct(reviews: Review[]): Map<string, ProductReviewAggregate> {
+  const buckets = new Map<string, { total: number; count: number }>();
+
+  for (const review of reviews) {
+    if (review.status !== "approved" || review.rating < 1) continue;
+    const current = buckets.get(review.productSlug) ?? { total: 0, count: 0 };
+    current.total += review.rating;
+    current.count += 1;
+    buckets.set(review.productSlug, current);
+  }
+
+  return new Map(
+    [...buckets.entries()].map(([productSlug, aggregate]) => [
+      productSlug,
+      {
+        rating: roundRating(aggregate.total / aggregate.count),
+        reviewCount: aggregate.count
+      }
+    ])
+  );
+}
+
+function applyReviewAggregates(products: Product[], reviews: Review[]): Product[] {
+  const aggregates = reviewAggregatesByProduct(reviews);
+  return products.map((product) => {
+    const aggregate = aggregates.get(product.slug);
+    return {
+      ...product,
+      rating: aggregate?.rating ?? 0,
+      reviewCount: aggregate?.reviewCount ?? 0
+    };
+  });
+}
+
 async function fetchStrapiJson<T>({ tag, path }: FetchOptions): Promise<T | null> {
   const token = optionalEnv(process.env.STRAPI_API_TOKEN);
   const base = optionalEnv(process.env.STRAPI_INTERNAL_URL) || optionalEnv(process.env.NEXT_PUBLIC_STRAPI_URL);
@@ -424,27 +467,28 @@ function mapUnknownList<T>(items: unknown[] | undefined, mapper: (input: unknown
 }
 
 async function getCatalogUncached(): Promise<CatalogData> {
-  const cached = await redisGetJson<CatalogData>("catalog:v1");
+  const cached = await redisGetJson<CatalogData>("catalog:v2");
   if (cached) return cached;
 
   const response = await fetchStrapiJson<CatalogEndpointResponse>({ tag: "catalog", path: "/api/catalog" });
   const data = response?.data;
   if (!data) return fallbackData;
 
+  const reviews = mapUnknownList(data.reviews, mapReview, fallbackData.reviews);
   const catalog = {
     settings: data.settings ? mapSettings(data.settings) : fallbackData.settings,
     categories: mapUnknownList(data.categories, mapCategory, fallbackData.categories),
-    products: mapUnknownList(data.products, mapProduct, fallbackData.products),
+    products: applyReviewAggregates(mapUnknownList(data.products, mapProduct, fallbackData.products), reviews),
     heroSlides: mapUnknownList(data.heroSlides, mapHeroSlide, fallbackData.heroSlides),
     testimonials: mapUnknownList(data.testimonials, mapTestimonial, fallbackData.testimonials),
     faqs: mapUnknownList(data.faqs, mapFaq, fallbackData.faqs),
     siteMetrics: mapUnknownList(data.siteMetrics, mapSiteMetric, fallbackData.siteMetrics),
     blogPosts: mapUnknownList(data.blogPosts, mapBlogPost, fallbackData.blogPosts),
     policies: mapUnknownList(data.policies, mapPolicy, fallbackData.policies),
-    reviews: mapUnknownList(data.reviews, mapReview, fallbackData.reviews)
+    reviews
   };
 
-  await redisSetJson("catalog:v1", catalog);
+  await redisSetJson("catalog:v2", catalog);
   return catalog;
 }
 
@@ -454,7 +498,7 @@ export const getCatalog = cacheForNext(getCatalogUncached, ["catalog"], {
 });
 
 async function getProductDetailUncached(slug: string): Promise<ProductDetailData | undefined> {
-  const cacheKey = `product-detail:v1:${slug}`;
+  const cacheKey = `product-detail:v2:${slug}`;
   const cached = await redisGetJson<ProductDetailData>(cacheKey);
   if (cached) return cached;
 
@@ -474,10 +518,11 @@ async function getProductDetailUncached(slug: string): Promise<ProductDetailData
     return detail;
   }
 
+  const reviews = mapUnknownList(data.reviews, mapReview, []).filter((review) => review.status === "approved");
   const detail = {
-    product,
-    reviews: mapUnknownList(data.reviews, mapReview, []).filter((review) => review.status === "approved"),
-    related: mapUnknownList(data.related, mapProduct, []),
+    product: applyReviewAggregates([product], reviews)[0],
+    reviews,
+    related: applyReviewAggregates(mapUnknownList(data.related, mapProduct, []), reviews),
     settings: data.settings ? mapSettings(data.settings) : fallbackData.settings
   };
 

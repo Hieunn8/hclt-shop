@@ -112,10 +112,12 @@ export function redisKeysForTags(tags: string[]): string[] {
   for (const tag of tags) {
     if (tag === "catalog" || tag === "products" || tag === "reviews" || tag === "hero-slides" || tag === "site-settings") {
       keys.add("catalog:v1");
+      keys.add("catalog:v2");
     }
 
     if (tag.startsWith("product:")) {
       keys.add(`product-detail:v1:${tag.slice("product:".length)}`);
+      keys.add(`product-detail:v2:${tag.slice("product:".length)}`);
     }
 
   }
@@ -124,5 +126,5 @@ export function redisKeysForTags(tags: string[]): string[] {
 }
 
 export function redisPatternsForTags(tags: string[]): string[] {
-  return tags.some((tag) => tag === "products" || tag === "reviews") ? ["product-detail:v1:*"] : [];
+  return tags.some((tag) => tag === "products" || tag === "reviews") ? ["product-detail:v1:*", "product-detail:v2:*"] : [];
 }
